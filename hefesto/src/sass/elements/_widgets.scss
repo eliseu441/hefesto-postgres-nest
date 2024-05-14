@@ -1,0 +1,154 @@
+.dropdownText {
+    text-align: left;
+    white-space: nowrap;
+  }
+  .dropdownText .rw-popup-container{
+    min-width: max-content;
+  }
+  .rw-popup{
+    max-height: 200px!important;
+  }
+  .comboTitles {
+    margin-left: 5px;
+    font-size: 14px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    white-space: nowrap;
+    color: rgb(69, 69, 69);
+  }
+  
+//TELA TOPOLOGIA
+  .input-topologia{
+    box-shadow: inset #abacaf 0 0 0 2px;
+    border: 0;
+    background: rgba(0, 0, 0, 0);
+    appearance: none;
+    width: 100%;
+    position: relative;
+    border-radius: 3px;
+    padding: 9px 12px;
+    line-height: 1.4;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: 400;
+    height: 40px;
+    transition: all .2s ease;
+    text-transform: uppercase;
+  }
+  .input-topologia:hover{
+    box-shadow: 0 0 0 0 #fff inset, rgb(102, 0, 153) 0 0 0 2px;
+  }
+  .input-topologia:focus{
+    background-color: rgb(0, 0, 0, 0.1);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 3px 2px, rgba(60, 64, 67, 0.15) 2px 3px 6px 2px;
+    outline: none;
+  }
+
+  /////////// HOME
+  
+.text-edit{
+
+  align-items: center!important;
+  display: flex;
+  font-size: larger;
+}
+
+.comentarios textarea{
+  border: 2px solid #845e97;
+  width: 100%;
+  border-radius: 10px;
+  min-height: 100px!important;
+  resize: none;
+}
+.comentarios .form-control:disabled {
+  border: 2px solid rgb(192, 192, 192);
+  background-color: rgb(239, 239, 239)!important;
+  opacity: 1;
+}
+
+.react-toast-notifications__container{
+  z-index: 99999!important;
+}
+
+.input-dados{
+  color: rgba(102, 0, 153, 1);
+  border-bottom-color: rgba(102, 0, 153, 1);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: .009375em;
+  text-decoration: inherit;
+  text-transform: inherit;
+  align-self: flex-end;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px 16px 6px;
+  border: none;
+  border-bottom: 2px solid;
+  border-radius: 4px 4px 0 0;
+  background: rgb(232, 231, 231);
+  height: 45px;
+
+}
+.input-dados:disabled{
+  color: rgb(134, 134, 134)!important;
+  border-bottom-color: rgb(255, 255, 255)!important;
+
+}
+.input-dados:active, .input-dados:focus { 
+  outline: none;
+  border-color: #660099;
+ }
+  .DateInput_input {
+    height: 35px;
+ }
+
+
+.etapas .rw-widget-input {
+  box-shadow: 0 0 0 0 #fff inset, rgb(7, 70, 197, 0.7) 0 0 0 2px;
+}
+.rw-dropdown-list-input, .rw-state-focus .rw-widget-picker.rw-widget-input, .rw-state-focus{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+  font-weight: 500;
+  font-size: 13px;
+  color:#5a5a5a;
+  border: none!important; 
+}
+.rw-state-focus, .rw-state-focus .rw-widget-picker.rw-widget-input{
+  font-size: 14px!important;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 3px 2px, rgba(60, 64, 67, 0.15) 2px 3px 6px 2px!important;
+}
+
+.rw-multiselect .rw-widget{
+  text-shadow: none;
+  
+} 
+
+
+
+.input-serial{
+  border-bottom-color: #3c4fe0!important;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: .009375em;
+  text-decoration: inherit;
+  text-transform: inherit;
+  align-self: flex-end;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px 3px 6px;
+  border: none;
+  border-bottom: 2px solid;
+  border-radius: 4px 4px 0 0;
+  height: 2.6em;
+  text-transform: uppercase;
+
+}
+.input-serial:disabled{
+  color: rgb(134, 134, 134)!important;
+  border-bottom-color: rgb(255, 255, 255)!important;
+
+}
+.input-serial:active, .input-serial:focus { 
+  outline: none;
+  border-color: #660099;
+ }

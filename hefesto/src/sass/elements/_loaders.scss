@@ -1,0 +1,72 @@
+
+.loader {
+    margin-top: 20px!important;
+    display: block;
+    margin-left: 20%;
+    margin-top: 40px;
+    width: 60%;
+    height: 6px;
+    border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  .loader::before {
+    content: "";
+    position: absolute;
+    background: #0071e2;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    border-radius: 30px;
+    animation: load 1s ease-in-out infinite;
+    
+  }
+
+  @keyframes load {
+    50% {
+      width: 100%;
+    }
+  
+    100% {
+      right: 0;
+      left: unset;
+    }
+  }
+
+  .st-preloader {
+    position: fixed;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 105vw;
+    height: 105vh;
+	overflow: hidden;
+    background: rgb(145,55,1);
+background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(75,0,93,1) 100%);
+}
+.st-preloader .st-preloader-in {
+    animation: spin 1.3s ease-in-out infinite;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    border-radius: 50%;
+}
+@keyframes spin {
+    0% {
+		transform: scale(0.5);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		transform: scale(0.5);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}

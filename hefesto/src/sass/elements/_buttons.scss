@@ -1,0 +1,15 @@
+.information {
+    width: max-content;
+    height: max-content;
+    padding-top: 2px;
+    background: #660099;
+    background: linear-gradient(to top left, #0400d6 0%, #cfd0ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+  }
+  .information:hover{
+    transition: all 0.2s;
+    transform: scale(1.1);
+  }
+  

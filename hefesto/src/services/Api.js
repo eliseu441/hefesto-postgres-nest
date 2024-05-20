@@ -1,0 +1,11 @@
+import axios from 'axios';
+
+const baseURL = (window.location.origin.includes('localhost') ? window.location.origin : 'link_api') + '/api';
+
+export default axios.create({
+	baseURL,
+	headers: {
+		//Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkX3VzdWFyaW8iOjM4NTMsInVzdWFyaW8iOiJBMDE1MDc5MyIsIm5vbWUiOiJFbGlzZXUgQ2FldGFubyBEYSBTaWx2YSIsImVtYWlsIjoiZWxpc2V1LnNpbHZhQHRlbGVmb25pY2EuY29tIiwidGVsZWZvbmUiOiIoMTIpIDk5Nzg1LTgwMjQiLCJpZF9kb21pbmlvIjoxLCJkb21pbmlvIjoiUkVERUNPUlAiLCJhdGl2byI6dHJ1ZSwiZmxnX2JldGEiOmZhbHNlLCJhdXRlbnRpY2FkbyI6dHJ1ZSwicGVyZmlsIjp7ImlkIjoyMDk4LCJub21lIjoiVklWTy1HRVNUT1IiLCJwZXJtaXNzb2VzIjpbeyJpZCI6MjA3Niwibm9tZSI6IlZJU1VBTElaQVIiLCJ2YWxvciI6IiJ9LHsiaWQiOjIxMTksIm5vbWUiOiJFRElUQVIiLCJ2YWxvciI6IiJ9XX0sInBlcmZpcyI6W3siaWQiOjIwOTgsIm5vbWUiOiJWSVZPLUdFU1RPUiJ9XX0sImlhdCI6MTY3MTQ0NjYwMywiZXhwIjoxNjcxNDQ5NjAzfQ.9tLYMb37hVtWqM_8KawYX93X5AeZ88vYndHZYEu71mE",
+		ContentType: 'application/json',
+	},
+});

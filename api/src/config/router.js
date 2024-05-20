@@ -8,7 +8,7 @@ module.exports = app => {
         
         const app_path = process.env.app_path ? process.env.app_path : '';
         
-        protected.use('', app.root.routes.ArtGallery);
+        protected.use('', app.root.routes.CreateProject);
         
         app.use(`${ app_path }/api`, protected);
         

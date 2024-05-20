@@ -1,7 +1,6 @@
 //////// HEADER
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 .notSticked .color-nav{
-	background: rgb(102,0,153, 0.7);
 	z-index: 99;
 }
 .logout:hover{
@@ -329,4 +328,12 @@
 	font-weight: 500;
 	letter-spacing: 1px;
 	
+}
+.teste-responsive{
+		display: grid;
+		justify-content: center;
+		justify-items: center;
+		align-items: center;
+		grid-template-columns:repeat(auto-fill, minmax(400px, 4fr));
+	  
 }

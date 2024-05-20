@@ -4,7 +4,7 @@ var apm = require('elastic-apm-node').start({
     // Override service name from package.json
     // Allowed characters: a-z, A-Z, 0-9, -, _, 
     // and space
-    serviceName: 'sobressalente-justificativa-api',
+    serviceName: 'hefesto-api',
 
     // Use if APM Server requires a secret token
     // secretToken: 'kexdnsso6N6687MUqQ',

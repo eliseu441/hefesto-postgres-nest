@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, HashRouter } from 'react-router-dom';
 import './sass/style.scss';
 import './App.css'
 import Home from './pages/Home/Home.jsx';
+import CreateProduct from './pages/Creation/CreateProduct.jsx';
 import Header from './layout/header/Header.jsx';
 import SideNavBar from './layout/sidebar/SideNavBar.jsx';
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -18,6 +19,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Home />} />
+        <Route path="/CreateProduct" element={<CreateProduct />} />
       </Routes>
 
 

@@ -101,23 +101,28 @@ const SideNavBar = (ref) => {
 								<span class='sidebarHover' style={{ marginLeft: "10px" }}> Dashboard</span>
 							)} </span></span>
 						</Link>
+						<Link to="/CreateProduct" className="decoration" onClick={e => removeChecked()} >
+							<span class="list-group-item list-group-item-action " ><span class="text-margin sidebarHover"><i class="bi bi-plus-square-fill fs-3 icons-color "></i>{isExpanded && (
+								<span class='sidebarHover' style={{ marginLeft: "10px" }}> Create Product</span>
+							)} </span></span>
+						</Link>
 						<div>
-							<span class="list-group-item list-group-item-action dropdown-toggle" onClick={subMenuFibra}><span class="text-margin sidebarHover"><i class="bi bi-bar-chart-fill fs-3 icons-color"></i>{isExpanded && (
-								<span style={{ marginLeft: "10px" }}> Informações</span>
+							<span class="list-group-item list-group-item-action dropdown-toggle" onClick={subMenuFibra}><span class="text-margin sidebarHover"><i class="bi bi-telephone-outbound-fill fs-5 icons-color"></i>{isExpanded && (
+								<span style={{ marginLeft: "10px" }}> Contato</span>
 							)} </span></span>
 						</div>
 						{showSubFibra && (
 							<div class='transitionDown'>
 								<div class="list-group">
-									<Link to="/circuito" className="decoration" onClick={e => removeChecked()}>
-										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-database-fill-up fs-6 icons-color sub-menu"></i>{isExpanded && (
+									<Link to="https://www.linkedin.com/in/eliseu-caetano-da-silva-68a272186/" className="decoration" onClick={e => removeChecked()}>
+										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-linkedin fs-6 icons-color sub-menu"></i>{isExpanded && (
 											<span style={{ marginLeft: "20px" }}>Linkedin</span>
 										)} </span></span>
 									</Link>
-								</div>
+								</div>	
 								<div class="list-group">
-									<Link to="/editarSite/0" className="decoration" onClick={e => removeChecked()}>
-										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-pencil-square fs-6 icons-color sub-menu"></i>{isExpanded && (
+									<Link to="https://github.com/eliseu441/" className="decoration" onClick={e => removeChecked()}>
+										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-github fs-6 icons-color sub-menu"></i>{isExpanded && (
 											<span style={{ marginLeft: "20px" }}>Github</span>
 										)} </span></span>
 									</Link>

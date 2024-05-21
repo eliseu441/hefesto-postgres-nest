@@ -14,9 +14,11 @@ const CreateProducts = () => {
     const [company, setCompany] = useState('');
     const [prazo, setPrazo] = useState('');
     const [products, setProducts] = useState([]);
+    const [insertProducts, setInsertProducts] = useState([]);
     const [detailProdutcs, setDetailProducts] = useState([]);
     const [quantity, setQuantity] = useState('');
     const [price, setPrice] = useState('');
+    const [workflow, setWorkflow] = useState('');
     const [selectedDate, setSelectedDate] = useState(null);
 
     const handleDateChange = (date) => {
@@ -27,19 +29,20 @@ const CreateProducts = () => {
 
 
     const showProducts = async () => {
+        //   onClick={e=> deleteProduct(detailProdutcs.length)}
         let cardProducts = [...detailProdutcs,
-        <div class='col-sm mt-4 d-flex justify-content-center p-1'>
-
+        <div class='col-sm mt-4 d-flex justify-content-center p-1' data-aos="fade-up">
             <div class="product ">
-                <div class="info__title col-12">{products}</div>
+                <div class="info__title col-12" style={{ fontWeight: 'bold', textTransform: 'uppercase' }}>{products}</div>
                 <div class="info__title col-12">Preço: R${price}</div>
                 <div class="info__title col-12">Quantidade: {quantity}</div>
-
             </div>
-
         </div>
         ]
-        console.log(cardProducts)
+        let finalProducts = [...insertProducts, { item: products, price: price, quantity: quantity }]
+
+        console.log(finalProducts)
+        setInsertProducts(finalProducts)
         setDetailProducts(cardProducts)
     }
 
@@ -49,13 +52,34 @@ const CreateProducts = () => {
         let insert = await API.insertProject({
             project,
             company,
-            quantity,
             date: moment(selectedDate).format('YYYY-MM-DD')
         }).then(res => {
+            if (res.insert == true) {
+                setWorkflow(project)
+            }
+        }).catch(console.error)
+    };
+    const sendProducts = async () => {
+        let insert = await API.insertProducts({insertProducts, project: workflow}).then(res => {
             console.log(res)
         }).catch(console.error)
     };
+    const deleteProduct = async (i) => {
+        /*
+        console.log(i)
+        console.log(insertProducts)
+        console.log(detailProdutcs)
+        let teste = detailProdutcs.splice(index, 1); 
+        let teste2 = insertProducts.splice(index, 1); 
+        setDetailProducts(teste)
+        setInsertProducts(teste2)
+        console.log(insertProducts); 
+*/
+setDetailProducts([])
+setInsertProducts([])
 
+
+    };
 
 
 
@@ -64,7 +88,7 @@ const CreateProducts = () => {
 
             <div className="page-content" >
 
-                <div className="card " >
+                <div className="card cadastro-project" data-aos="zoom-in" data-aos-duration="800">
 
                     <div className="card-body">
 
@@ -97,36 +121,9 @@ const CreateProducts = () => {
                                 </div>
                             </div>
 
-                            <div class='col-12 row d-flex justify-content-start'>
-                                <div class='col-sm-7'>
-                                    <span class="comboTitles">Produto</span>
-                                    <input type="text" placeholder="Nome" class="input-topologia"
-                                        value={products} onChange={e => setProducts(e.target.value)}
-                                    />
-                                </div>
-                                <div class='col-sm-2'>
-                                    <span class="comboTitles">Quantidade</span>
-                                    <input type="number" placeholder="qtd." class="input-topologia "
-                                        value={quantity} onChange={e => setQuantity(e.target.value)}
-                                    /></div>
 
-                                <div class='col-7 col-sm-2'>
-                                    <span class="comboTitles">Preço</span>
-                                    <input type="number" placeholder="price(un.)" class="input-topologia "
-                                        value={price} onChange={e => setPrice(e.target.value)}
-                                    />
-
-                                </div>
-                                <div class="button_plus nova-massiva mt-4 col-1" onClick={(e) => showProducts()}>
-                                    <i class="bi bi-plus-lg" >
-                                        <span class="tooltiptext">adicionar produto</span>
-                                    </i>
-                                </div>
-
-
-                            </div>
-                            <div class='d-flex mt-2'>
-                                <div class='col-sm-2 '>
+                            <div class='d-flex mt-2 ms-3'>
+                                <div class='col-sm row'>
                                     <button
                                         className="btn criar-fo"
                                         onClick={e => insertProject()}
@@ -136,31 +133,75 @@ const CreateProducts = () => {
                                     </button>
 
                                 </div>
-                                <div class="cleanPed ms-2" >
-                                    <i class="bi bi-funnel-fill">
-                                        <span class="tooltiptext">Limpar campos</span>
-                                    </i>
-                                </div>
+
                             </div>
 
                         </div>
 
                     </div>
                 </div>
+                <div className="card mt-3"  data-aos="zoom-in" data-aos-duration="800" data-aos-delay="1000">
+
+                    <div class='col-12 row d-flex justify-content-start mb-3 ms-2'>
+                        <div class='col-sm-7'>
+                            <span class="comboTitles">Produto</span>
+                            <input type="text" placeholder="Nome" class="input-topologia"
+                                value={products} onChange={e => setProducts(e.target.value)}
+                            />
+                        </div>
+                        <div class='col-6 col-sm-2'>
+                            <span class="comboTitles">Quantidade</span>
+                            <input type="number" placeholder="qtd." class="input-topologia "
+                                value={quantity} onChange={e => setQuantity(e.target.value)}
+                            /></div>
+
+                        <div class='col-6 col-sm-2'>
+                            <span class="comboTitles">Preço</span>
+                            <input type="number" placeholder="price(un.)" class="input-topologia "
+                                value={price} onChange={e => setPrice(e.target.value)}
+                            />
+
+                        </div>
+                        <div class="button_plus nova-massiva mt-4 me-2 ms-3" onClick={(e) => showProducts()}>
+                            <i class="bi bi-plus-lg" >
+                                <span class="tooltiptext">adicionar produto</span>
+                            </i>
+                        </div>
+                        <div class="sendProducts ms-2 mt-4 col-1 ms-3"  onClick={e=> sendProducts()}>
+                            <i class="bi bi-send-x-fill">
+                                <span class="tooltiptext">cadastrar produtos</span>
+                            </i>
+                        </div>
+                        <div class="cleanPed ms-1 mt-4 ms-3" onClick={e=> deleteProduct()} >
+                            <i class="bi bi-trash-fill ">
+                                <span class="tooltiptext">Excluir produtos</span>
+                            </i>
+                        </div>
+
+
+                    </div>
+                </div>
                 <div className="card mt-3" >
 
-                    <div className="card-body">
+                    <div className="card-body" >
 
-                        <div id="linha-horizontal">
-                            <h4 class='col-11 d-flex justify-content-center'>Produtos cadastrados</h4>
+                        <div id="linha-horizontal" class=' d-flex row'>
+                            <h4 class='.col-12 ms-2 d-flex justify-content-center ' style={{ color: workflow ? 'black' : 'red' }}>
+                                {workflow ? `Produtos Cadastrados - ${workflow}`
+                                    : '*Crie um projeto antes de cadastrar produtos*'
+                                }
+                            </h4>
+
+
                         </div>
-                        <div class='row d-flex justify-content-center'>
+                        <div class='row d-flex justify-content-center' data-aos="zoom-in" >
                             {detailProdutcs.length > 0 ? detailProdutcs : <></>}
 
                         </div>
 
                     </div>
                 </div>
+
             </div>
         </>
 

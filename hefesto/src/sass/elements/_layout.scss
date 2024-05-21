@@ -358,4 +358,10 @@
 	cursor: pointer;
 	margin-left: auto;
   }
-  
+  .react-datepicker{
+	z-index: 99999;
+  }
+  .cadastro-project{
+	position: relative;
+	z-index: 2;
+  }

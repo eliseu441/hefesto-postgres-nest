@@ -5,7 +5,7 @@ module.exports = (app) => {
 
     router.get('/insertProject', function (req,res,next) {
  
-        app.root.models.Hefesto.insertProject(req.query)
+        app.root.models.Insert.insertProject(req.query)
         .then(result => res.status(result.status ? result.status : 200).json(result))
         .catch(err => next(err))
 

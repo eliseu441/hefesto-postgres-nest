@@ -11,7 +11,7 @@ class Hefesto {
     async insertProject(params) {
         try {
             
-            const result = await this.app.root.services.Hefesto.insertProject(params)
+            const result = await this.app.root.services.Insert.insertProject(params)
             return result
         } catch (error) {
             throw error;

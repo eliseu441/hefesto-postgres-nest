@@ -14,16 +14,15 @@ class Hefesto {
    
     async insertProject(params) {
         try {
-            
 
-            const sql = await dbFIBRA.query({
+
+            const sql = await dbFIBRA.update({
                 sql:`
-            INSERT INTO TBF_EQUIPAMENTO_INSTALACAO
+            INSERT INTO TBA_PROJECTS
             (
                 
                 COMPANY
                 ,PROJECT
-                ,PRICE
                 ,DEADLINE
             )
             VALUES
@@ -31,19 +30,20 @@ class Hefesto {
                 
                 @COMPANY
                 ,@PROJECT
-                ,@PRICE
                 ,@DEADLINE
             )`,
             inputs: [
-                { key: 'COMPANY', type: dbFIBRA.Int, value: 'testeC' },
-                { key: 'PROJECT', type: dbFIBRA.Int, value: 'testeP' },
-                { key: 'PRICE', type: dbFIBRA.Int, value: 10 },
-                { key: 'DEADLINE', type: dbFIBRA.Int, value: '2024-05-20' },
+                { key: 'COMPANY', type: dbFIBRA.Varchar, value: params.company },
+                { key: 'PROJECT', type: dbFIBRA.Varchar, value: params.project },
+                { key: 'DEADLINE', type: dbFIBRA.DateTime, value: params.date },
             ]
         
     });
-
-            return sql
+    if(sql == 1){
+        return {insert: true}
+    }else{
+        return {insert: false}
+    }
         } catch (error) {
             console.error(error);
             throw error;

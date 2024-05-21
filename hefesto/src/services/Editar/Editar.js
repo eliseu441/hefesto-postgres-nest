@@ -1,32 +1,13 @@
 import API from '../Api.js'
 
-class pageEdit
+class EditProject
 {
-    getVolume = async (params) => {
+    insertProject = async (params) => {
 
         try
         {
-            const response = await API.get(`/getVolumeSites`, { params });
-
-            if (response.status === 200)
-            {
-                const data = response.data;
-
-                return data;
-            }
-
-            return [];
-
-        } catch (err) {
-            throw err;
-        }
-    };
-    getCards = async (params) => {
-
-        try
-        {
-            const response = await API.get(`/getCards`, { params });
-
+            const response = await API.get(`/insertProject`, { params });
+            console.log(response)
             if (response.status === 200)
             {
                 const data = response.data;
@@ -316,4 +297,4 @@ class pageEdit
     
 }
 
-export default new pageEdit();
+export default new EditProject();

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = (window.location.origin.includes('localhost') ? window.location.origin : 'link_api') + '/api';
+const baseURL = (window.location.origin.includes('localhost') ? 'http://localhost:5000' : 'link_api') + '/api';
 
 export default axios.create({
 	baseURL,

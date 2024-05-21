@@ -8,7 +8,7 @@ module.exports = app => {
         
         const app_path = process.env.app_path ? process.env.app_path : '';
         
-        protected.use('', app.root.routes.CreateProject);
+        protected.use('', app.root.routes.Insert);
         
         app.use(`${ app_path }/api`, protected);
         

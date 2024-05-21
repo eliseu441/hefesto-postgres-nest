@@ -329,11 +329,33 @@
 	letter-spacing: 1px;
 	
 }
-.teste-responsive{
-		display: grid;
-		justify-content: center;
-		justify-items: center;
-		align-items: center;
-		grid-template-columns:repeat(auto-fill, minmax(400px, 4fr));
-	  
-}
+.product {
+	font-family: system-ui, sans-serif;
+	min-width: 120px;
+	max-width: 240px;
+	padding: 12px;
+	align-items: center;
+	justify-content: start;
+	background: #509AF8;
+	border-radius: 8px;
+	box-shadow: 0px 0px 5px -3px #111;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow-x: scroll;
+  }
+  
+  
+  .info__title {
+	width: 100%;
+	font-weight: 500;
+	font-size: 14px;
+	color: #fff;
+  }
+  
+  .info__close {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	margin-left: auto;
+  }
+  

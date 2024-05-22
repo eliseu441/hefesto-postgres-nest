@@ -99,6 +99,86 @@ class editHefesto {
             throw error;
         }
     }
+    async insertStatus(params) {
+        try {
+            const getOrder = await dbMSSQL.query({
+                sql: `SELECT [ORDER] FROM TBA_STATUS WHERE ID = @ID `,
+                inputs: [
+                    { key: 'ID', type: dbMSSQL.Int, value: params.order_id !== 0 ? params.order_id : 0 }
+                ]
+            }); 
+            let order = getOrder.length !==0 ? getOrder[0].ORDER : 50 
+            if( getOrder.length !==0){
+                        const add = await dbMSSQL.update({
+                            sql: `
+                            UPDATE TBA_STATUS
+                            SET [ORDER] = [ORDER] + 1 WHERE [ORDER] > @ORDER`,
+                            inputs: [
+                                { key: 'ORDER', type: dbMSSQL.Decimal, value: order }
+                            ]
+                        });
+                        const subtract = await dbMSSQL.update({
+                            sql: `
+                            UPDATE TBA_STATUS
+                            SET [ORDER] = [ORDER] - 1 WHERE [ORDER] < @ORDER`,
+                            inputs: [
+                                { key: 'ORDER', type: dbMSSQL.Decimal, value: order + 1 }
+                            ]
+                        });
+            }
+            if(params.order_id == '0'){
+                const getData = await dbMSSQL.query({
+                    sql: `SELECT * FROM TBA_STATUS WHERE ID_PROJECT = @ID_PROJECT `,
+                    inputs: [
+                        { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.id_project }
+                    ]
+                }); 
+                if( getData.length !==0){
+                    const newOrder = await dbMSSQL.query({
+                        sql: `SELECT TOP (1) [ORDER] - 1 AS [ORDER]
+                        FROM [HEFESTO].[dbo].[TBA_STATUS] ORDER BY [ORDER] ASC`
+                    }); 
+                    order = newOrder[0].ORDER
+                }
+            }
+
+
+
+                const sql = await dbMSSQL.update({
+                    sql: `
+                INSERT INTO TBA_STATUS
+                (   
+                    [STATUS]
+                    ,[SLA]
+                    ,[ORDER]
+                    ,[ID_PROJECT]
+                )
+                VALUES
+                (   
+                    @STATUS
+                    ,@SLA
+                    ,@ORDER
+                    ,@ID_PROJECT
+                )`,
+                    inputs: [
+                        { key: 'STATUS', type: dbMSSQL.Varchar, value: params.status },
+                        { key: 'SLA', type: dbMSSQL.Int, value: params.sla },
+                        { key: 'ORDER', type: dbMSSQL.Decimal, value: order },
+                        { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.id_project },
+                    ]
+                });
+
+                if(sql == 1){
+                    return { insert: true }
+                }else{
+                    return { insert: false }
+                }
+            
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }
 
 module.exports = new editHefesto();

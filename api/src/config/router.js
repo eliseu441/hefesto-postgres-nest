@@ -9,6 +9,7 @@ module.exports = app => {
         const app_path = process.env.app_path ? process.env.app_path : '';
         
         protected.use('', app.root.routes.Editar);
+        protected.use('', app.root.routes.Consultar);
         
         app.use(`${ app_path }/api`, protected);
         
@@ -24,16 +25,6 @@ module.exports = app => {
             {
                 res.status(500).json({ name, message, stack }); 
             }
-            
-            // app.get('apm').captureError(err, { 
-            //     request  : req,
-            //     response : res,
-            //     custom   : { 
-            //         ...req.query, 
-            //         ...req.body, 
-            //         ...req.params 
-            //     }
-            // });
             
             next(err);
         }); 

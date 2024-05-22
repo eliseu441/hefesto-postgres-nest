@@ -27,7 +27,8 @@ function useOutsideAlerter(ref, isExpanded) {
 
 const SideNavBar = (ref) => {
 	const [isExpanded, setExpendState] = useState(false);
-	const [showSubFibra, setShowSubFibra] = useState(false);
+	const [showSubFibra, setShowSubContact] = useState(false);
+	const [showSubCreation, setShowSubCreation] = useState(false);
 	const [showSubEQP, setShowSubEQP] = useState(false);
 	const [showSubLegado, setShowSubLegado] = useState(false);
 
@@ -47,9 +48,15 @@ const SideNavBar = (ref) => {
 			setExpendState(false)
 		}
 	}
-	const subMenuFibra = () => {
-		setShowSubFibra(!showSubFibra);
-
+	const subMenu = (id) => {
+		switch(id){
+			case 1:
+				setShowSubCreation(!showSubCreation);
+				break;	
+			case 2:
+				setShowSubContact(!showSubFibra);
+			  break;	
+		  }
 	}
 	const subMenuEQP = () => {
 		setShowSubEQP(!showSubEQP);
@@ -60,7 +67,7 @@ const SideNavBar = (ref) => {
 
 	}
 	const removeChecked = () => {
-		setShowSubFibra(false);
+		setShowSubContact(false);
 		setShowSubEQP(false);
 		setShowSubLegado(false);
 
@@ -107,7 +114,32 @@ const SideNavBar = (ref) => {
 							)} </span></span>
 						</Link>
 						<div>
-							<span class="list-group-item list-group-item-action dropdown-toggle" onClick={subMenuFibra}><span class="text-margin sidebarHover"><i class="bi bi-telephone-outbound-fill fs-5 icons-color"></i>{isExpanded && (
+							<span class="list-group-item list-group-item-action dropdown-toggle" onClick={e => subMenu(1)}><span class="text-margin sidebarHover"><i class="bi bi-database-fill-up fs-3 icons-color"></i>{isExpanded && (
+								<span style={{ marginLeft: "10px" }}>Workflow</span>
+							)} </span></span>
+						</div>
+						{showSubCreation && (
+							<div class='transitionDown'>
+								<div class="list-group">
+									<Link to="/CreateProduct" className="decoration" onClick={e => removeChecked()}>
+										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-plus-square-fill fs-6 icons-color sub-menu"></i>{isExpanded && (
+											<span style={{ marginLeft: "20px" }}>Criar produto</span>
+										)} </span></span>
+									</Link>
+								</div>	
+								<div class="list-group">
+									<Link to="/CreateProcess" className="decoration" onClick={e => removeChecked()}>
+										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-github fs-6 icons-color sub-menu"></i>{isExpanded && (
+											<span style={{ marginLeft: "20px" }}>Adicionar esteira</span>
+										)} </span></span>
+									</Link>
+								</div>
+
+
+							</div>
+						)}
+						<div>
+							<span class="list-group-item list-group-item-action dropdown-toggle" onClick={e => subMenu(2)}><span class="text-margin sidebarHover"><i class="bi bi-telephone-outbound-fill fs-5 icons-color"></i>{isExpanded && (
 								<span style={{ marginLeft: "10px" }}> Contato</span>
 							)} </span></span>
 						</div>
@@ -124,13 +156,6 @@ const SideNavBar = (ref) => {
 									<Link to="https://github.com/eliseu441/" className="decoration" onClick={e => removeChecked()}>
 										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-github fs-6 icons-color sub-menu"></i>{isExpanded && (
 											<span style={{ marginLeft: "20px" }}>Github</span>
-										)} </span></span>
-									</Link>
-								</div>
-								<div class="list-group" style={{display: "none"}}>
-									<Link to="/editMassivo" className="decoration" onClick={e => removeChecked()}>
-										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i style={{ WebkitTextStroke: "0.3px", marginLeft: "3px" }} class="bi bi-card-checklist fs-5 icons-color sub-menu"></i>{isExpanded && (
-											<span style={{ marginLeft: "20px" }}>Editar Massivo</span>
 										)} </span></span>
 									</Link>
 								</div>

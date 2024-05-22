@@ -4,7 +4,7 @@ import { DropdownList, Multiselect, Combobox } from 'react-widgets';
 import moment from 'moment';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-import API from '../../services/Editar/Editar'
+import API from '../../services/workflow/Editar'
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

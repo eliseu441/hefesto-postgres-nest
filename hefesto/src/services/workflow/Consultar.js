@@ -2,11 +2,11 @@ import API from '../Api.js'
 
 class EditProject
 {
-    insertProject = async (params) => {
+    getProjects = async (params) => {
 
         try
         {
-            const response = await API.get(`/insertProject`, { params });
+            const response = await API.get(`/getProjects`, { params });
             if (response.status === 200)
             {
                 const data = response.data;
@@ -17,25 +17,25 @@ class EditProject
             return [];
 
         } catch (err) {
-            console.error('insertProject error:', err)
+            console.error('getProjects error:', err)
         }
     };
-    insertProducts = async (params) => {
+    getStatus = async (params) => {
 
         try
         {
-            const response = await API.get(`/insertProducts`, { params });
-            console.log(response)
-            if (response.status === 200){
-
+            const response = await API.get(`/getStatus`, { params });
+            if (response.status === 200)
+            {
                 const data = response.data;
+
                 return data;
             }
 
             return [];
 
         } catch (err) {
-            console.error('insertProducts error:', err);
+            console.error('getStatus error:', err)
         }
     };
 }

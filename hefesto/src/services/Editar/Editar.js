@@ -7,7 +7,6 @@ class EditProject
         try
         {
             const response = await API.get(`/insertProject`, { params });
-            console.log(response)
             if (response.status === 200)
             {
                 const data = response.data;
@@ -18,7 +17,7 @@ class EditProject
             return [];
 
         } catch (err) {
-            throw err;
+            console.error('insertProject error:', err)
         }
     };
     insertProducts = async (params) => {
@@ -36,7 +35,7 @@ class EditProject
             return [];
 
         } catch (err) {
-            throw err;
+            console.error('insertProducts error:', err);
         }
     };
 }

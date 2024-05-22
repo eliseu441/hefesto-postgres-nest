@@ -5,6 +5,8 @@ import moment from 'moment';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import API from '../../services/Editar/Editar'
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -20,6 +22,7 @@ const CreateProducts = () => {
     const [price, setPrice] = useState('');
     const [workflow, setWorkflow] = useState('');
     const [selectedDate, setSelectedDate] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -41,28 +44,81 @@ const CreateProducts = () => {
         ]
         let finalProducts = [...insertProducts, { item: products, price: price, quantity: quantity }]
 
-        console.log(finalProducts)
         setInsertProducts(finalProducts)
         setDetailProducts(cardProducts)
+
     }
 
 
 
     const insertProject = async () => {
-        let insert = await API.insertProject({
+        setLoading(true)
+        const api = await API.insertProject({
             project,
             company,
             date: moment(selectedDate).format('YYYY-MM-DD')
-        }).then(res => {
-            if (res.insert == true) {
-                setWorkflow(project)
-            }
-        }).catch(console.error)
+        })
+        
+        if (api !== undefined && api.insert == true) {
+            setWorkflow(project)
+            toast.success('Projeto criado, adicione produtos!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+            });
+        } else {
+            toast.error('Erro ao criar Projeto!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+            })
+        }
+        setLoading(false)
+
     };
     const sendProducts = async () => {
-        let insert = await API.insertProducts({insertProducts, project: workflow}).then(res => {
-            console.log(res)
-        }).catch(console.error)
+        setLoading(true)
+        let insert = await API.insertProducts({ insertProducts, project: workflow })
+        if (insert !== undefined && insert.insert == true) {
+            setWorkflow(project)
+            toast.success('Produtos adicionados, va para tela de etapas!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+            });
+        } else {
+            toast.error('Erro ao inserir Produtos!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+            })
+        }
+
+        setLoading(false)
     };
     const deleteProduct = async (i) => {
         /*
@@ -75,8 +131,8 @@ const CreateProducts = () => {
         setInsertProducts(teste2)
         console.log(insertProducts); 
 */
-setDetailProducts([])
-setInsertProducts([])
+        setDetailProducts([])
+        setInsertProducts([])
 
 
     };
@@ -86,7 +142,13 @@ setInsertProducts([])
     return (
         <>
 
+            {loading == true ? <div class=" bg-loader">
+                <div class="loader"></div>
+            </div> : <></>}
+
+            <ToastContainer limit={2} />
             <div className="page-content" >
+
 
                 <div className="card cadastro-project" data-aos="zoom-in" data-aos-duration="800">
 
@@ -140,7 +202,7 @@ setInsertProducts([])
 
                     </div>
                 </div>
-                <div className="card mt-3"  data-aos="zoom-in" data-aos-duration="800" data-aos-delay="1000">
+                <div className="card mt-3" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="1000">
 
                     <div class='col-12 row d-flex justify-content-start mb-3 ms-2'>
                         <div class='col-sm-7'>
@@ -167,12 +229,12 @@ setInsertProducts([])
                                 <span class="tooltiptext">adicionar produto</span>
                             </i>
                         </div>
-                        <div class="sendProducts ms-2 mt-4 col-1 ms-3"  onClick={e=> sendProducts()}>
+                        <div class="sendProducts ms-2 mt-4 col-1 ms-3" onClick={e => sendProducts()}>
                             <i class="bi bi-send-x-fill">
                                 <span class="tooltiptext">cadastrar produtos</span>
                             </i>
                         </div>
-                        <div class="cleanPed ms-1 mt-4 ms-3" onClick={e=> deleteProduct()} >
+                        <div class="cleanPed ms-1 mt-4 ms-3" onClick={e => deleteProduct()} >
                             <i class="bi bi-trash-fill ">
                                 <span class="tooltiptext">Excluir produtos</span>
                             </i>

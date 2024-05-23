@@ -30,6 +30,7 @@ body{
   min-height: calc(100vh - 55px);
   width: calc(100vw - 26px);
   margin-top: 55px;
+  padding-top: 10px;
   padding-left: 110px;
 
 }
@@ -58,25 +59,32 @@ body{
     width: 100%;
     border-bottom: 2px solid rgb(95, 95, 95);
 }
+#linha-horizontal-card {
+  width: 100%;
+  border-top: 2px solid #3a5eff;
+}
 
   #insertMassiva .modal-content{
     height: 550px!important;
   }
 
 /////////////////// HOME
-.info-card{
-  height: max-content;
-}
-.hidden{
+.expandedInfo{
+  border: none!important;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.15s ease-out;
 }
-.expandedInfo{
+.step-card:hover .expandedInfo{
   overflow: hidden;
   max-height: 500px;
     transition: max-height 0.25s ease-in;
     
+}
+.step-card{
+  overflow: visible;
+  z-index: 9999;
+  position: relative;
 }
 
 

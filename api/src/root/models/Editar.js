@@ -44,6 +44,15 @@ class editHefesto {
             throw error;
         }
     }
+    async insertClient(params) {
+        try {
+            
+            const result = await this.app.root.services.Editar.insertClient(params)
+            return result
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = (app) => new editHefesto(app);

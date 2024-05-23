@@ -26,6 +26,15 @@ class getHefesto {
             throw error;
         }
     }
+    async getCards(params) {
+        try {
+            
+            const result = await this.app.root.services.Consultar.getCards(params)
+            return result
+        } catch (error) {
+            throw error;
+        }
+    }
    
 }
 

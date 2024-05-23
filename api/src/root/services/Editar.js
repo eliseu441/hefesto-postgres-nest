@@ -213,6 +213,43 @@ class editHefesto {
             throw error;
         }
     }
+    async insertClient(params) {
+        try {
+
+                const sql = await dbMSSQL.update({
+                    sql: `
+                    INSERT INTO TBF_CLIENTS
+                    (   
+                        [CLIENT]
+                        ,[ID_STATUS]
+                        ,[ID_SUBSTATUS]
+                        ,[ENTRANCE]
+                    )
+                    VALUES
+                    (   
+                        @CLIENT
+                        ,(SELECT TOP(1) ID FROM TBA_STATUS WHERE ID_PROJECT = @ID_PROJECT ORDER BY [ORDER])
+                        ,0
+                        ,CONVERT(date, CURRENT_TIMESTAMP)
+    
+                    )`,
+                    inputs: [
+                        { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.id_project },
+                        { key: 'CLIENT', type: dbMSSQL.Varchar, value: params.client }
+                    ]
+                });
+
+                if(sql == 1){
+                    return { insert: true }
+                }else{
+                    return { insert: false }
+                }
+            
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 
 }
 

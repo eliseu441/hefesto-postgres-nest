@@ -17,6 +17,13 @@ module.exports = (app) => {
         .catch(err => next(err))
 
     });
+    router.get('/getCards', function (req,res,next) {
+ 
+        app.root.models.Consultar.getCards(req.query)
+        .then(result => res.status(result.status ? result.status : 200).json(result))
+        .catch(err => next(err))
+
+    });
    
     return router;
 };

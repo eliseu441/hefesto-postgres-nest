@@ -29,7 +29,33 @@ class getHefesto {
             const status = await dbMSSQL.query({
                 sql: `SELECT * FROM TBA_STATUS WHERE ID_PROJECT = @ID_PROJECT ORDER BY STATUS`,
                 inputs: [
-                    { key: 'ID_PROJECT', type: dbMSSQL.Varchar, value: params.id_project }
+                    { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.id_project }
+                ]
+            });
+
+         
+            return status
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+    async getCards(params) {
+        try {
+            const status = await dbMSSQL.query({
+                sql: `
+                SELECT DISTINCT
+                COUNT(*) AS TOTAL 
+                ,A.ID_STATUS
+                ,B.STATUS
+                ,SUM(CASE WHEN DATEADD(day, 1, A.ENTRANCE) > A.ENTRANCE THEN 1 ELSE 0 END) AS SLA
+                 FROM TBF_CLIENTS AS A 
+                INNER JOIN TBA_STATUS AS B ON A.ID_STATUS = B.ID
+                LEFT JOIN TBA_SUBSTATUS AS C ON C.ID = A.ID_SUBSTATUS
+                WHERE B.ID_PROJECT = @ID_PROJECT
+                GROUP BY A.ID_STATUS, A.ENTRANCE, B.STATUS`,
+                inputs: [
+                    { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.id_project }
                 ]
             });
 

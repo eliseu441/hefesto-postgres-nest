@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { DropdownList, Multiselect, Combobox } from 'react-widgets';
-import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import APIGET from '../../services/workflow/Consultar';
 import APIEDIT from '../../services/workflow/Editar';
@@ -18,7 +17,7 @@ const CreateProcess = () => {
 
     const [project, setProject] = useState('');
     const [after, setAfter] = useState(0);
-    const [main, setMain] = useState(0);
+    const [mainStatus, setMainStatus] = useState(0);
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState('');
     const [substatus, setSubstatus] = useState('');
@@ -97,7 +96,7 @@ const CreateProcess = () => {
         setLoading(true)
         const insertSubs = await APIEDIT.insertSubstatus({
             substatus,
-            id_status: main
+            id_status: mainStatus
         });
 
         if (insertSubs !== undefined && insertSubs.insert == true) {
@@ -170,12 +169,14 @@ const CreateProcess = () => {
                     </div>
 
                 </div>
-                <div className="card mt-3" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="1000">
+                {project  ?
+                <div>
+                <div className="card mt-3" data-aos="zoom-in" data-aos-duration="800" >
 
                     <div class='col-12 row d-flex justify-content-start mb-3 ms-2'>
                         <div class='col-sm-7'>
                             <span class="comboTitles">Status</span>
-                            <input type="text" placeholder="Nome" class="input-topologia"
+                            <input type="text" placeholder="Nome" class="default-input"
                                 value={status} onChange={e => setStatus(e.target.value)}
                             />
                         </div>
@@ -211,7 +212,7 @@ const CreateProcess = () => {
                         </div>
                         <div class='col-6 col-sm-2'>
                             <span class="comboTitles">SLA:</span>
-                            <input type="number" placeholder="price(un.)" class="input-topologia "
+                            <input type="number" placeholder="price(un.)" class="default-input "
                                 value={sla} onChange={e => setSla(e.target.value)}
                             />
 
@@ -226,16 +227,12 @@ const CreateProcess = () => {
 
                     </div>
                 </div>
-
-
-
-
-                <div className="card mt-3" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="1000" style={{overflow: 'visible!important'}}>
+                <div className="card mt-3" data-aos="zoom-in" data-aos-duration="800" >
 
                     <div class='col-12 row d-flex justify-content-start mb-3 ms-2'>
                         <div class='col-sm-7'>
                             <span class="comboTitles">Substatus</span>
-                            <input type="text" placeholder="Nome" class="input-topologia"
+                            <input type="text" placeholder="Nome" class="default-input"
                                 value={substatus} onChange={e => setSubstatus(e.target.value)}
                             />
                         </div>
@@ -249,7 +246,7 @@ const CreateProcess = () => {
                                 placeholder="todos"
                                 dropUp
                                 onChange={
-                                    e => { setMain(e.ID) }
+                                    e => { setMainStatus(e.ID) }
                                 }
                             />
                         </div>
@@ -260,17 +257,22 @@ const CreateProcess = () => {
                         </div>
                     </div>
                 </div>
+                </div>
+                : <></>}
+                {comboStatus.length > 0 && columns ?
                 <div className="card mt-3" style={{zIndex: 0}}>
                     <div class='row p-3' style={{zIndex: 0}}>
                     <h2 class='col-11 d-flex justify-content-center status-macro'>status ativos</h2>
-                    {comboStatus.length > 0 && columns ?
+                   
                     <div>
                     <Table dataDetails={comboStatus} columnsDetails={columns} classTable={"tabelaLista"} searchBar='sim' />
                     </div>
-                     : <></>}
+                    
                      </div>
+                    
 
                 </div>
+                 : <></>}
 
 
 

@@ -160,13 +160,13 @@ const CreateProducts = () => {
                         <div class='row'>
                             <div class='col-sm-6 mt-4'>
                                 <span class="comboTitles">Nome do projeto</span>
-                                <input type="text" placeholder="ex: Produção de hardware" class="input-topologia"
+                                <input type="text" placeholder="ex: Produção de hardware" class="default-input"
                                     value={project} onChange={e => setProject(e.target.value)}
                                 />
                             </div>
                             <div class='col-sm-3 mt-4'>
                                 <span class="comboTitles">Empresa</span>
-                                <input type="text" placeholder="ex: Microsoft" class="input-topologia"
+                                <input type="text" placeholder="ex: Microsoft" class="default-input"
                                     value={company} onChange={e => setCompany(e.target.value)}
                                 />
                             </div>
@@ -184,19 +184,7 @@ const CreateProducts = () => {
                             </div>
 
 
-                            <div class='d-flex mt-2 ms-3'>
-                                <div class='col-sm row'>
-                                    <button
-                                        className="btn criar-fo"
-                                        onClick={e => insertProject()}
-                                    >
-                                        Criar Projeto
-
-                                    </button>
-
-                                </div>
-
-                            </div>
+                            
 
                         </div>
 
@@ -207,19 +195,19 @@ const CreateProducts = () => {
                     <div class='col-12 row d-flex justify-content-start mb-3 ms-2'>
                         <div class='col-sm-7'>
                             <span class="comboTitles">Produto</span>
-                            <input type="text" placeholder="Nome" class="input-topologia"
+                            <input type="text" placeholder="Nome" class="default-input"
                                 value={products} onChange={e => setProducts(e.target.value)}
                             />
                         </div>
                         <div class='col-6 col-sm-2'>
                             <span class="comboTitles">Quantidade</span>
-                            <input type="number" placeholder="qtd." class="input-topologia "
+                            <input type="number" placeholder="qtd." class="default-input "
                                 value={quantity} onChange={e => setQuantity(e.target.value)}
                             /></div>
 
                         <div class='col-6 col-sm-2'>
                             <span class="comboTitles">Preço</span>
-                            <input type="number" placeholder="price(un.)" class="input-topologia "
+                            <input type="number" placeholder="price(un.)" class="default-input "
                                 value={price} onChange={e => setPrice(e.target.value)}
                             />
 

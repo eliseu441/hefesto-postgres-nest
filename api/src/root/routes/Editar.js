@@ -24,5 +24,12 @@ module.exports = (app) => {
         .catch(err => next(err))
 
     });
+    router.get('/insertSubstatus', function (req,res,next) {
+ 
+        app.root.models.Editar.insertSubstatus(req.query)
+        .then(result => res.status(result.status ? result.status : 200).json(result))
+        .catch(err => next(err))
+
+    });
     return router;
 };

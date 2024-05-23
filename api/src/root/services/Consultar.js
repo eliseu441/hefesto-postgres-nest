@@ -27,7 +27,7 @@ class getHefesto {
     async getStatus(params) {
         try {
             const status = await dbMSSQL.query({
-                sql: `SELECT ID, STATUS FROM TBA_STATUS WHERE ID_PROJECT = @ID_PROJECT`,
+                sql: `SELECT * FROM TBA_STATUS WHERE ID_PROJECT = @ID_PROJECT ORDER BY STATUS`,
                 inputs: [
                     { key: 'ID_PROJECT', type: dbMSSQL.Varchar, value: params.id_project }
                 ]

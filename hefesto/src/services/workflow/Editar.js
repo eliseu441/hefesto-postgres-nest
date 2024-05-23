@@ -56,6 +56,24 @@ class EditProject
             console.error('insertStatus error:', err);
         }
     };
+    insertSubstatus = async (params) => {
+
+        try
+        {
+            const response = await API.get(`/insertSubstatus`, { params });
+            console.log(response)
+            if (response.status === 200){
+
+                const data = response.data;
+                return data;
+            }
+
+            return [];
+
+        } catch (err) {
+            console.error('insertSubstatus error:', err);
+        }
+    };
 }
 
 export default new EditProject();

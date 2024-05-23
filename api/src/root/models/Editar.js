@@ -35,6 +35,15 @@ class editHefesto {
             throw error;
         }
     }
+    async insertSubstatus(params) {
+        try {
+            
+            const result = await this.app.root.services.Editar.insertSubstatus(params)
+            return result
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = (app) => new editHefesto(app);

@@ -179,6 +179,41 @@ class editHefesto {
             throw error;
         }
     }
+
+    async insertSubstatus(params) {
+        try {
+
+                const sql = await dbMSSQL.update({
+                    sql: `
+                INSERT INTO TBA_SUBSTATUS
+                (   
+                    [SUBSTATUS]
+                    ,[ID_STATUS]
+                )
+                VALUES
+                (   
+                    @SUBSTATUS
+                    ,@ID_STATUS
+
+                )`,
+                    inputs: [
+                        { key: 'SUBSTATUS', type: dbMSSQL.Varchar, value: params.substatus },
+                        { key: 'ID_STATUS', type: dbMSSQL.Int, value: params.id_status },
+                    ]
+                });
+
+                if(sql == 1){
+                    return { insert: true }
+                }else{
+                    return { insert: false }
+                }
+            
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
 }
 
 module.exports = new editHefesto();

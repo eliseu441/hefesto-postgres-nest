@@ -35,6 +35,15 @@ class getHefesto {
             throw error;
         }
     }
+    async getClients(params) {
+        try {
+            
+            const result = await this.app.root.services.Consultar.getClients(params)
+            return result
+        } catch (error) {
+            throw error;
+        }
+    }
    
 }
 

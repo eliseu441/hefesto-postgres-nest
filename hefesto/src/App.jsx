@@ -6,7 +6,7 @@ import './App.css'
 import Home from './pages/Home/Home.jsx';
 import CreateProduct from './pages/Creation/CreateProduct.jsx';
 import CreateProcess from './pages/Process/CreateProcess.jsx';
-import Header from './layout/header/Header.jsx';
+//import Header from './layout/header/Header.jsx';
 import SideNavBar from './layout/sidebar/SideNavBar.jsx';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Aos from 'aos';
@@ -21,7 +21,6 @@ function App() {
   return (
 
     <HashRouter>
-    <Header />
     <SideNavBar />
       <Routes>
 

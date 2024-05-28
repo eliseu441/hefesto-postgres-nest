@@ -5,7 +5,6 @@ import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import APIGET from '../../services/workflow/Consultar';
 import APIEDIT from '../../services/workflow/Editar';
-import { setDefaultLocale } from 'react-datepicker';
 
 
 
@@ -17,14 +16,15 @@ const Home = () => {
     const [project, setProject] = useState('');
     const [client, setClient] = useState('');
     const [loading, setLoading] = useState(false);
-    const [cardId, setCardId] = useState(1);
+    const [cardId, setCardId] = useState(0);
     const [cards, setCards] = useState([]);
+    const [cardDesc, setCardDesc] = useState([]);
+    const [active, setActive] = useState([]);
     useEffect(() => {
         setLoading(true)
         const projects = APIGET.getProjects().then(e => {
             setComboProject(e)
             setLoading(false)
-
         }).catch(console.error)
 
     }, []);
@@ -68,50 +68,63 @@ const Home = () => {
         setProject(el.ID)
         const apiCard = await APIGET.getCards({ id_project: el.ID })
         let formatCards = []
+        let formatCardDesc = []
+        let contador = 0
+        console.log(apiCard)
         for (let item of apiCard) {
-            let id = item.ID_STATUS + 1
             console.log(item)
             formatCards = [...formatCards,
-            <div class=' col-md-3 col-11 ms-1 step-card'>
-                <div id={item.ID_STATUS} class='d-flex justify-content-between'>
-                    <span class='cardTitle'>{item.STATUS}</span>
-                    <i class="bi bi-info-circle-fill fs-2 information" onClick={e => setCardId(item.ID_STATUS)}></i>
-                </div>
+            <p id={item.ID} onClick={e => setDesc(parseInt(item.ID))} class='col-md-3 col-11 ms-1 step-card' data-bs-toggle="collapse" data-bs-target="#collapseCard" aria-expanded="false" aria-controls="collapseCard">
 
-                <div id={item.ID_STATUS} class='expandedInfo'>
-                    <div class='col-sm-6'>
-                        <span class="comboTitles ">Total no status:</span>
-                        <div class='total-box col-sm-6 col-3'>
-                            <span >{item.TOTAL}</span>
-                        </div>
+
+                <button class="noselect card-step">
+                    <span class="text">{(contador + 1) + '-' + item.STATUS}</span>
+                    <span class="icon"><i class="bi bi-plus plus-step"></i></span>
+                </button>
+
+            </p>
+            ]
+            formatCardDesc = [...formatCardDesc,
+            <div id={item.ID_STATUS} class='expandedInfo col-12 row d-flex'>
+                <div class='col-sm-4'>
+                    <span class="comboTitles ">Total no status:</span>
+                    <div class='total-box col-sm-6 col-3'>
+                        <span >{item.TOTAL}</span>
                     </div>
-                    <div class='col-sm-6'>
-                        <span class="comboTitles" style={{ color: 'red' }}>Atrasados:</span>
-                        <div class='total-box col-sm-6 col-3' style={{ borderColor: 'red', boxShadow: '1px 1px 0px 1px red' }}>
-                            <span >{item.SLA}</span>
-                        </div>
+                </div>
+                <div class='col-sm-4'>
+                    <span class="comboTitles" style={{ color: 'red' }}>Atrasados:</span>
+                    <div class='total-box col-sm-6 col-3' style={{ borderColor: 'red', boxShadow: '1px 1px 0px 1px red' }}>
+                        <span >{item.SLA}</span>
                     </div>
-                    <div class='col-sm mb-1 mt-1'>
-                        <button
-                            className="btn edit-card"
-                            style={{ height: '30px' }}
-                        >
-                            Alterar
-                        </button>
-                    </div>
+                </div>
+                <div class='col-sm mb-1 mt-1'>
+                    <button
+                        className="btn edit-card"
+                        style={{ height: '30px' }}
+                        onClick={e => setCardId(item.ID_STATUS)}
+                    >
+                        Alterar
+                    </button>
                 </div>
             </div>
             ]
             setCards(formatCards)
-            setCardId(id + 1)
+            setCardDesc(formatCardDesc)
+            setCardId(cardId + 1)
+            contador++
             console.log(cards)
 
         }
         setLoading(false)
         //   onClick={e=> deleteProduct(detailProdutcs.length)}
-
-
     }
+    const setDesc = async (ind) => {
+        console.log(cardDesc, ind)
+        setActive(cardDesc[ind])
+    }
+
+
 
 
     return (
@@ -164,10 +177,16 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div class='row'>
-                        {cards ? cards : <></>}
-                    </div>
 
+                    <div class='row d-flex'>
+
+                        {cards ? cards : <></>}
+                        <div class="collapse col-12" id="collapseCard">
+                            <div class="card card-body">
+                                {active ? active : <></>}
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>

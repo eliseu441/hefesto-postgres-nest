@@ -104,7 +104,7 @@
 }
 
 .side-nav-container-NX {
-	width: 95px;
+	width: 50px;
 }
 
 .nav-upper,
@@ -218,6 +218,7 @@
 #checkbox-menu {
 	position: absolute;
 	opacity: 0;
+	
 }
 .nav-heading label {
 	color: #7030a0!important;
@@ -264,7 +265,10 @@
 	transform: rotate(45deg);
 	top: 8px;
 }
-
+#checkbox-menu+label span{
+	width: 30px!important;
+	height: 3.5px;
+}
 .width-side {
 	width: 140px;
 }

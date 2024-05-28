@@ -99,22 +99,12 @@ const SideNavBar = (ref) => {
 				<div className="nav-menu">
 					<div class="list-group">
 						<Link to="/" className="decoration" onClick={e => removeChecked()} >
-							<span class="list-group-item list-group-item-action " ><span class="text-margin sidebarHover"><i class="bi bi-reception-4 fs-2 icons-color "></i>{isExpanded && (
-								<span class='sidebarHover' style={{ marginLeft: "10px" }}> Fluxo</span>
-							)} </span></span>
-						</Link>
-						<Link to="/" className="decoration" onClick={e => removeChecked()} >
-							<span class="list-group-item list-group-item-action " ><span class="text-margin sidebarHover"><i class="bi bi-pie-chart-fill fs-3 icons-color "></i>{isExpanded && (
+							<span class="list-group-item list-group-item-action " ><span class="text-margin sidebarHover"><i class="bi bi-pie-chart-fill fs-4 icons-color "></i>{isExpanded && (
 								<span class='sidebarHover' style={{ marginLeft: "10px" }}> Dashboard</span>
 							)} </span></span>
 						</Link>
-						<Link to="/CreateProduct" className="decoration" onClick={e => removeChecked()} >
-							<span class="list-group-item list-group-item-action " ><span class="text-margin sidebarHover"><i class="bi bi-plus-square-fill fs-3 icons-color "></i>{isExpanded && (
-								<span class='sidebarHover' style={{ marginLeft: "10px" }}> Create Product</span>
-							)} </span></span>
-						</Link>
 						<div>
-							<span class="list-group-item list-group-item-action dropdown-toggle" onClick={e => subMenu(1)}><span class="text-margin sidebarHover"><i class="bi bi-database-fill-up fs-3 icons-color"></i>{isExpanded && (
+							<span class="list-group-item list-group-item-action dropdown-toggle" onClick={e => subMenu(1)}><span class="text-margin sidebarHover"><i class="bi bi-database-fill-up fs-4 icons-color"></i>{isExpanded && (
 								<span style={{ marginLeft: "10px" }}>Workflow</span>
 							)} </span></span>
 						</div>

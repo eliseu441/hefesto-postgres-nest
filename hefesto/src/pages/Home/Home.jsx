@@ -66,12 +66,9 @@ const Home = () => {
 
         setLoading(false)
     };
-
-    useEffect(() => {
-        console.log(cardId)
-    }, [cardId]);
     const getCards = async (el) => {
         setLoading(true)
+        console.log(el.ID)
         setProject(el.ID)
         const apiCard = await APIGET.getCards({ id_project: el.ID })
         let formatCards = []
@@ -80,17 +77,6 @@ const Home = () => {
         console.log(apiCard)
         for (let item of apiCard) {
             console.log(item)
-            formatCards = [...formatCards,
-            <p id={item.ID} onClick={e => setDesc(parseInt(item.ID))} class='col-md-3 col-11 ms-1 step-card' data-bs-toggle="collapse" data-bs-target="#collapseCard" aria-expanded="false" aria-controls="collapseCard">
-
-
-                <button class="noselect card-step">
-                    <span class="text">{(contador + 1) + '-' + item.STATUS}</span>
-                    <span class="icon"><i class="bi bi-plus plus-step"></i></span>
-                </button>
-
-            </p>
-            ]
             formatCardDesc = [...formatCardDesc,
             <div id={item.ID_STATUS} class='expandedInfo col-12 row d-flex'>
                 <div class='col-sm-4'>
@@ -116,18 +102,29 @@ const Home = () => {
                 </div>
             </div>
             ]
-            setCards(formatCards)
             setCardDesc(formatCardDesc)
+
+            formatCards = [...formatCards,
+                <p id={item.ID} onClick={e => setActive(formatCardDesc[parseInt(item.ID)])} class='col-md-3 col-11 ms-1 step-card' data-bs-toggle="collapse" data-bs-target="#collapseCard" aria-expanded="false" aria-controls="collapseCard">
+    
+    
+                    <button class="noselect card-step">
+                        <span class="text">{(contador + 1) + '-' + item.STATUS}</span>
+                        <span class="icon"><i class="bi bi-plus plus-step"></i></span>
+                    </button>
+    
+                </p>
+                ]
+                setCards(formatCards)
             setCardId(cardId + 1)
             contador++
-            console.log(cards)
 
         }
         setLoading(false)
         //   onClick={e=> deleteProduct(detailProdutcs.length)}
     }
     const setDesc = async (ind) => {
-        console.log(cardDesc, ind)
+        
         setActive(cardDesc[ind])
     }
 

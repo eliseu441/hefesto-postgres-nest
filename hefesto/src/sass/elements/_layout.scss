@@ -85,7 +85,7 @@
 	height: 100vh!important;
 	z-index: 10;
 	background-color: var(--light);
-	max-width: 200px;
+	max-width: 180px;
 	overflow: hidden;
 	position: fixed;
 	color: var(--dark);
@@ -97,7 +97,7 @@
 }
 .side-nav-container-NX {
 	z-index: 10;
-	max-width: 85px;
+	max-width: 70px;
 	overflow: hidden;
 	transition: max-width 0.4s ease-in-out;
 }
@@ -162,7 +162,6 @@
 
 
 .text-margin {
-	margin-left: 0px;
 	color: white;
 }
 
@@ -209,7 +208,7 @@
 
 .nav-heading label span {
 	position: absolute;
-	margin-left: 10px;
+	margin-left: 15px;
 	display: block;
 	width: 100%;
 	border-radius: 30px;

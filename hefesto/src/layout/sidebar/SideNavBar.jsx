@@ -113,14 +113,14 @@ const SideNavBar = (ref) => {
 							<div class='transitionDown'>
 								<div class="list-group">
 									<Link to="/CreateProduct" className="decoration" onClick={e => removeChecked()}>
-										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-plus-square fs-6 icons-color sub-menu"></i>{isExpanded && (
-											<span data-aos="zoom-in" data-aos-duration="800" style={{ marginLeft: "15px" }}>Criar produto</span>
+										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-plus-square-fill fs-6 icons-color sub-menu"></i>{isExpanded && (
+											<span data-aos="zoom-in" data-aos-duration="800" style={{ marginLeft: "15px" }}>Criar projeto</span>
 										)} </span></span>
 									</Link>
 								</div>	
 								<div class="list-group">
 									<Link to="/CreateProcess" className="decoration" onClick={e => removeChecked()}>
-										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-github fs-6 icons-color sub-menu"></i>{isExpanded && (
+										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-diagram-2-fill fs-6 icons-color sub-menu"></i>{isExpanded && (
 											<span data-aos="zoom-in" data-aos-duration="800" style={{ marginLeft: "15px" }}>Adicionar esteira</span>
 										)} </span></span>
 									</Link>

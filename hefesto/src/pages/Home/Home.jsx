@@ -79,6 +79,10 @@ const Home = () => {
             console.log(item)
             formatCardDesc = [...formatCardDesc,
             <div id={item.ID_STATUS} class='expandedInfo col-12 row d-flex'>
+                <div class='col-12 d-flex justify-content-center'>
+
+                    <h4 class='status-macro'> {item.STATUS}</h4>
+                </div>
                 <div class='col-sm-4'>
                     <span class="comboTitles ">Total no status:</span>
                     <div class='total-box col-sm-6 col-3'>
@@ -166,7 +170,7 @@ const Home = () => {
                     </div>
 
                 </div>
-                {project !== '' ? <div class='card ps-3 pt-2 col-12 mt-2'>
+                {project !== '' ? <div class=' ps-3 pt-2 col-12 mt-2'>
                     <div>
                         <div class='col-12  d-flex justify-content-start mt-1 pe-4'>
                             <button class='workflow' data-bs-toggle="modal" data-bs-target="#modalCadastro"> novo cadastro
@@ -181,7 +185,7 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div class='row d-flex'>
+                    <div class='row d-flex pb-4 pe-2'>
 
                         {cards ? cards : <></>}
                         <div class="collapse col-12" id="collapseCard">

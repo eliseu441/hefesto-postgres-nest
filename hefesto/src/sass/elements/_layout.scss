@@ -82,23 +82,24 @@
 .side-nav-container {
 	border-top-right-radius: 20px;
 	border-bottom-right-radius: 20px;
+	height: 100vh!important;
 	z-index: 10;
 	background-color: var(--light);
 	max-width: 200px;
 	overflow: hidden;
 	position: fixed;
 	color: var(--dark);
-	transition: max-width 0.6s ease-in-out;
+	transition: max-width 0.4s ease-in-out;
 
 }
 .dropdown-toggle:after{
-	display: none!important;
+	color: white;
 }
 .side-nav-container-NX {
 	z-index: 10;
 	max-width: 85px;
 	overflow: hidden;
-	transition: max-width 0.6s ease-in-out;
+	transition: max-width 0.4s ease-in-out;
 }
 
 .nav-upper,
@@ -161,8 +162,6 @@
 
 
 .text-margin {
-	display: flex;
-	justify-content: start;
 	margin-left: 0px;
 	color: white;
 }
@@ -215,7 +214,7 @@
 	width: 100%;
 	border-radius: 30px;
 	background: rgb(255, 255, 255);
-	transition: all 0.3s ease-in-out 0.2s;
+	transition: all 0.2s ease-in-out ;
 }
 
 .nav-heading label span:nth-child(1) {

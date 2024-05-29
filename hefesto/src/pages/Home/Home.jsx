@@ -123,13 +123,12 @@ const Home = () => {
         setLoading(false)
         //   onClick={e=> deleteProduct(detailProdutcs.length)}
     }
-    const setDesc = async (ind) => {
-        
-        setActive(cardDesc[ind])
-    }
 
 
 
+
+
+    
 
     return (
 

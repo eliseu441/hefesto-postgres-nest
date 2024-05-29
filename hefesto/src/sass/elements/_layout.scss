@@ -208,7 +208,7 @@
 
 .nav-heading label span {
 	position: absolute;
-	margin-left: 15px;
+	margin-left: 17px;
 	display: block;
 	width: 100%;
 	border-radius: 30px;
@@ -229,7 +229,7 @@
 }
 
 #checkbox-menu.active+label span:nth-child(1) {
-	transform: rotate(-45deg);
+	transform: rotate(-90deg);
 	top: 8px;
 }
 
@@ -238,11 +238,10 @@
 }
 
 #checkbox-menu.active+label span:nth-child(3) {
-	transform: rotate(45deg);
 	top: 8px;
 }
 #checkbox-menu+label span{
-	width: 30px!important;
+	width: 25px!important;
 	height: 2px;
 }
 .width-side {

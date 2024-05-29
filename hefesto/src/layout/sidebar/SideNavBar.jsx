@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import vivo from './logo_nav_white.png';
+import logo from './logo_nav_white.png';
 
 
 function useOutsideAlerter(ref, isExpanded) {
@@ -92,7 +92,7 @@ const SideNavBar = (ref) => {
 					</label>
 					{isExpanded && (
 						<div >
-							<span><img src={vivo} data-aos="zoom-in" data-aos-duration="800" className="img-nav"/></span>
+							<span><img src={logo} data-aos="zoom-in" data-aos-duration="800" className="img-nav"/></span>
 						</div>
 					)}
 					
@@ -114,14 +114,14 @@ const SideNavBar = (ref) => {
 								<div class="list-group">
 									<Link to="/CreateProduct" className="decoration" onClick={e => removeChecked()}>
 										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-plus-square fs-6 icons-color sub-menu"></i>{isExpanded && (
-											<span data-aos="zoom-in" data-aos-duration="800" style={{ marginLeft: "20px" }}>Criar produto</span>
+											<span data-aos="zoom-in" data-aos-duration="800" style={{ marginLeft: "15px" }}>Criar produto</span>
 										)} </span></span>
 									</Link>
 								</div>	
 								<div class="list-group">
 									<Link to="/CreateProcess" className="decoration" onClick={e => removeChecked()}>
 										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-github fs-6 icons-color sub-menu"></i>{isExpanded && (
-											<span data-aos="zoom-in" data-aos-duration="800" style={{ marginLeft: "20px" }}>Adicionar esteira</span>
+											<span data-aos="zoom-in" data-aos-duration="800" style={{ marginLeft: "15px" }}>Adicionar esteira</span>
 										)} </span></span>
 									</Link>
 								</div>
@@ -139,14 +139,14 @@ const SideNavBar = (ref) => {
 								<div class="list-group">
 									<Link to="https://www.linkedin.com/in/eliseu-caetano-da-silva-68a272186/" className="decoration" onClick={e => removeChecked()}>
 										<span data-aos="zoom-in" data-aos-duration="800" class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-linkedin fs-6 icons-color sub-menu"></i>{isExpanded && (
-											<span style={{ marginLeft: "20px" }}>Linkedin</span>
+											<span style={{ marginLeft: "15px" }}>Linkedin</span>
 										)} </span></span>
 									</Link>
 								</div>	
 								<div class="list-group">
 									<Link to="https://github.com/eliseu441/" className="decoration" onClick={e => removeChecked()}>
 										<span data-aos="zoom-in" data-aos-duration="800" class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-github fs-6 icons-color sub-menu"></i>{isExpanded && (
-											<span style={{ marginLeft: "20px" }}>Github</span>
+											<span style={{ marginLeft: "15px" }}>Github</span>
 										)} </span></span>
 									</Link>
 								</div>

@@ -4,8 +4,10 @@ import { DropdownList, Multiselect, Combobox } from 'react-widgets';
 import moment from 'moment';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-import API from '../../services/workflow/Editar'
+import APIEDIT from '../../services/workflow/Editar';
+import APIGET from '../../services/workflow/Consultar';
 import { ToastContainer, toast, Slide } from 'react-toastify';
+import Switch from "react-switch";
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -23,11 +25,20 @@ const CreateProducts = () => {
     const [workflow, setWorkflow] = useState('');
     const [selectedDate, setSelectedDate] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [existent, setExistent] = useState(false);
+    const [comboProjects, setComboProjects] = useState([]);
+
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
     useEffect(() => {
+        setLoading(true)
+        APIGET.getProjects().then(e => {
+            setComboProjects(e)
+            setLoading(false)
+
+        }).catch(console.error)
     }, []);
 
 
@@ -53,12 +64,12 @@ const CreateProducts = () => {
 
     const insertProject = async () => {
         setLoading(true)
-        const api = await API.insertProject({
+        const api = await APIEDIT.insertProject({
             project,
             company,
             date: moment(selectedDate).format('YYYY-MM-DD')
         })
-        
+
         if (api !== undefined && api.insert == true) {
             setWorkflow(project)
             toast.success('Projeto criado, adicione produtos!', {
@@ -90,7 +101,7 @@ const CreateProducts = () => {
     };
     const sendProducts = async () => {
         setLoading(true)
-        let insert = await API.insertProducts({ insertProducts, project: workflow })
+        let insert = await APIEDIT.insertProducts({ insertProducts, project: workflow })
         if (insert !== undefined && insert.insert == true) {
             setWorkflow(project)
             toast.success('Produtos adicionados, va para tela de etapas!', {
@@ -182,75 +193,109 @@ const CreateProducts = () => {
                                     <button className="btn ms-3 deleteDate" onClick={e => handleDateChange(null)}> <i class="bi bi-trash-fill"></i> </button>
                                 </div>
                             </div>
+                            
 
+                            <div class=' col-sm-4'>
+                            <div class='col-12 m-1 d-flex align-items-center'>
+                                
+                                <Switch
+                                    height={15}
+                                    handleDiameter={20}
+                                    width={35}
+                                    boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                                    activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                                    onChange={e=> setExistent(!existent)}
+                                    onColor="#86d3ff"
+                                    onHandleColor="#2693e6"
+                                    uncheckedIcon=""
+                                    checkedIcon=""
+                                    checked={existent} />
+                                    <span class='comboTitles'>Usar projeto existente</span>
+                            </div>
+                                <DropdownList
+                                    textField='PROJECT'
+                                    data={comboProjects}
+                                    className="dropdownText"
+                                    placeholder="selecione"
+                                    disabled={!existent}
+                                    onChange={
+                                        e => { setWorkflow(e.PROJECT) }
+                                    }
+                                />
 
+                            </div>
                             
 
                         </div>
 
                     </div>
                 </div>
-                <div className="card mt-3" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="1000">
+                {workflow ? <div data-aos="zoom-in" data-aos-duration="800">
+                    <div className="card mt-3" >
 
-                    <div class='col-12 row d-flex justify-content-start mb-3 ms-2'>
-                        <div class='col-sm-7'>
-                            <span class="comboTitles">Produto</span>
-                            <input type="text" placeholder="Nome" class="default-input"
-                                value={products} onChange={e => setProducts(e.target.value)}
-                            />
-                        </div>
-                        <div class='col-6 col-sm-2'>
-                            <span class="comboTitles">Quantidade</span>
-                            <input type="number" placeholder="qtd." class="default-input "
-                                value={quantity} onChange={e => setQuantity(e.target.value)}
-                            /></div>
+                        <div class='col-12 row d-flex justify-content-start mb-3 ms-2'>
+                            <div class='col-sm-7'>
+                                <span class="comboTitles">Produto</span>
+                                <input type="text" placeholder="Nome" class="default-input"
+                                    value={products} onChange={e => setProducts(e.target.value)}
+                                />
+                            </div>
+                            <div class='col-6 col-sm-2'>
+                                <span class="comboTitles">Quantidade</span>
+                                <input type="number" placeholder="qtd." class="default-input "
+                                    value={quantity} onChange={e => setQuantity(e.target.value)}
+                                /></div>
 
-                        <div class='col-6 col-sm-2'>
-                            <span class="comboTitles">Preço</span>
-                            <input type="number" placeholder="price(un.)" class="default-input "
-                                value={price} onChange={e => setPrice(e.target.value)}
-                            />
+                            <div class='col-6 col-sm-2'>
+                                <span class="comboTitles">Preço</span>
+                                <input type="number" placeholder="price(un.)" class="default-input "
+                                    value={price} onChange={e => setPrice(e.target.value)}
+                                />
+
+                            </div>
+                            <div class="button_plus nova-massiva mt-4 me-2 ms-3" onClick={(e) => showProducts()}>
+                                <i class="bi bi-plus-lg" >
+                                    <span class="tooltiptext">adicionar produto</span>
+                                </i>
+                            </div>
+                            <div class="sendProducts ms-2 mt-4 col-1 ms-3" onClick={e => sendProducts()}>
+                                <i class="bi bi-send-x-fill">
+                                    <span class="tooltiptext">cadastrar produtos</span>
+                                </i>
+                            </div>
+                            <div class="cleanPed ms-1 mt-4 ms-3" onClick={e => deleteProduct()} >
+                                <i class="bi bi-trash-fill ">
+                                    <span class="tooltiptext">Excluir produtos</span>
+                                </i>
+                            </div>
+
 
                         </div>
-                        <div class="button_plus nova-massiva mt-4 me-2 ms-3" onClick={(e) => showProducts()}>
-                            <i class="bi bi-plus-lg" >
-                                <span class="tooltiptext">adicionar produto</span>
-                            </i>
-                        </div>
-                        <div class="sendProducts ms-2 mt-4 col-1 ms-3" onClick={e => sendProducts()}>
-                            <i class="bi bi-send-x-fill">
-                                <span class="tooltiptext">cadastrar produtos</span>
-                            </i>
-                        </div>
-                        <div class="cleanPed ms-1 mt-4 ms-3" onClick={e => deleteProduct()} >
-                            <i class="bi bi-trash-fill ">
-                                <span class="tooltiptext">Excluir produtos</span>
-                            </i>
-                        </div>
+                    </div>
+
+                    <div className="card mt-3" >
+
+                        <div className="card-body"  >
+
+                            <div id="linha-horizontal" class=' d-flex row'>
+                                <h4 class='.col-12 ms-2 d-flex justify-content-center ' style={{ color: workflow ? 'black' : 'red' }}>
+                                    {workflow ? `Produtos Cadastrados - ${workflow}`
+                                        : '*Crie um projeto antes de cadastrar produtos*'
+                                    }
+                                </h4>
 
 
+                            </div>
+                            <div class='row d-flex justify-content-center'  >
+                                {detailProdutcs.length > 0 ? <div data-aos="zoom-in">{detailProdutcs}</div> : <p class='col-12 d-flex justify-content-center' style={{color:'red', fontWeight:'bolder'}}>nenhum produto cadastrado</p>}
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-                <div className="card mt-3" >
+                    : <></>}
 
-                    <div className="card-body" >
-
-                        <div id="linha-horizontal" class=' d-flex row'>
-                            <h4 class='.col-12 ms-2 d-flex justify-content-center ' style={{ color: workflow ? 'black' : 'red' }}>
-                                {workflow ? `Produtos Cadastrados - ${workflow}`
-                                    : '*Crie um projeto antes de cadastrar produtos*'
-                                }
-                            </h4>
-
-
-                        </div>
-                        <div class='row d-flex justify-content-center' data-aos="zoom-in" >
-                            {detailProdutcs.length > 0 ? detailProdutcs : <></>}
-
-                        </div>
-
-                    </div>
-                </div>
 
             </div>
         </>

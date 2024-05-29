@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import APIGET from '../../services/workflow/Consultar';
 import APIEDIT from '../../services/workflow/Editar';
 import Preloader from "../../layout/preLoader/Preloader.jsx";
+import columnStatus from './Utils/columnClients.js';
+import Table from '../../components/bootstrapTable2.jsx';
 
 
 
@@ -66,6 +68,12 @@ const Home = () => {
 
         setLoading(false)
     };
+    const tableClients = async () => {
+        setLoading(true)
+        let insert = await APIGET.insertClient({ id_project: project, client })
+
+        setLoading(false)
+    };
     const getCards = async (el) => {
         setLoading(true)
         console.log(el.ID)
@@ -78,25 +86,31 @@ const Home = () => {
         for (let item of apiCard) {
             console.log(item)
             formatCardDesc = [...formatCardDesc,
-            <div id={item.ID_STATUS} class='expandedInfo col-12 row d-flex'>
+            <div id={item.ID_STATUS} class='expandedInfo col-12 row d-flex justify-content-center'>
                 <div class='col-12 d-flex justify-content-center'>
 
                     <h4 class='status-macro'> {item.STATUS}</h4>
                 </div>
-                <div class='col-sm-4'>
-                    <span class="comboTitles ">Total no status:</span>
-                    <div class='total-box col-sm-6 col-3'>
+                <div class='col-lg-4 justify-content-center d-flex mt-2'>
+                    <span class="comboTitles ">Total:</span>
+                    <div class='total-box '>
                         <span >{item.TOTAL}</span>
                     </div>
-                </div>
-                <div class='col-sm-4'>
                     <span class="comboTitles" style={{ color: 'red' }}>Atrasados:</span>
-                    <div class='total-box col-sm-6 col-3' style={{ borderColor: 'red', boxShadow: '1px 1px 0px 1px red' }}>
+                    <div class='total-box ' style={{ borderColor: 'red', boxShadow: '1px 1px 0px 1px red' }}>
                         <span >{item.SLA}</span>
                     </div>
                 </div>
-                <div class='col-sm mb-1 mt-1'>
+                <div class='col-lg-4 justify-content-center d-flex mt-2'>
                     <button
+                        className="btn edit-stock me-2"
+                        style={{ height: '30px' }}
+                        onClick={e => setCardId(item.ID_STATUS)}
+                    >
+                        Estoque
+                    </button>
+                    <button
+                        data-bs-toggle="modal" data-bs-target="#modalCadastro"
                         className="btn edit-card"
                         style={{ height: '30px' }}
                         onClick={e => setCardId(item.ID_STATUS)}
@@ -109,17 +123,17 @@ const Home = () => {
             setCardDesc(formatCardDesc)
 
             formatCards = [...formatCards,
-                <p id={item.ID} onClick={e => setActive(formatCardDesc[parseInt(item.ID)])} class='col-md-3 col-11 ms-1 step-card' data-bs-toggle="collapse" data-bs-target="#collapseCard" aria-expanded="false" aria-controls="collapseCard">
-    
-    
-                    <button class="noselect card-step">
-                        <span class="text">{(contador + 1) + '-' + item.STATUS}</span>
-                        <span class="icon"><i class="bi bi-plus plus-step"></i></span>
-                    </button>
-    
-                </p>
-                ]
-                setCards(formatCards)
+            <p id={item.ID} onClick={e => setActive(formatCardDesc[parseInt(item.ID)])} class='col-md-3 col-11 ms-1 step-card' data-bs-toggle="collapse" data-bs-target="#collapseCard" aria-expanded="false" aria-controls="collapseCard">
+
+
+                <button class="noselect card-step">
+                    <span class="text">{(contador + 1) + '-' + item.STATUS}</span>
+                    <span class="icon"><i class="bi bi-plus plus-step"></i></span>
+                </button>
+
+            </p>
+            ]
+            setCards(formatCards)
             setCardId(cardId + 1)
             contador++
 
@@ -132,7 +146,7 @@ const Home = () => {
 
 
 
-    
+
 
     return (
 
@@ -185,7 +199,7 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div class='row d-flex pb-4 pe-2'>
+                    <div class='row d-flex pb-4 pe-2' >
 
                         {cards ? cards : <></>}
                         <div class="collapse col-12" id="collapseCard">
@@ -209,6 +223,37 @@ const Home = () => {
                         <div class="modal-header">
                             <div class="d-flex justify-content-center col-11">
                                 <h4 class='status-macro'> NOVO CADASTRO </h4>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row col-12 d-flex justify-content-start p-3">
+                                <div class='col-sm-7'>
+                                    <span class="comboTitles">Nome do cliente</span>
+                                    <input type="text" placeholder="Nome" class="default-input"
+                                        value={client} onChange={e => setClient(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            <div class='col-sm-3 ps-3'>
+                                <button
+                                    onClick={e => createClient()}
+                                    className="btn edit-card"
+                                    style={{ height: '30px' }}
+                                >
+                                    Cadastrar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" data-bs-backdrop="static" id="modalClients" tabindex="-1" aria-labelledby="modalClientsLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="d-flex justify-content-center col-11">
+                                <h4 class='status-macro'>CLIENTES</h4>
                             </div>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>

@@ -56,6 +56,24 @@ class EditProject
             console.error('getCards error:', err)
         }
     };
+    getClients = async (params) => {
+
+        try
+        {
+            const response = await API.get(`/getClients`, { params });
+            if (response.status === 200)
+            {
+                const data = response.data;
+
+                return data;
+            }
+
+            return [];
+
+        } catch (err) {
+            console.error('getClients error:', err)
+        }
+    };
 }
 
 export default new EditProject();

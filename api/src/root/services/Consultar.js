@@ -45,7 +45,8 @@ class getHefesto {
             const status = await dbMSSQL.query({
                 sql: `
                 SELECT DISTINCT
-                (ROW_NUMBER() OVER  (ORDER BY A.ID_STATUS) - 1) AS ID
+				B.[ORDER],
+                (ROW_NUMBER() OVER  (ORDER BY B.[ORDER]) - 1) AS ID
                 ,COUNT(*) AS TOTAL 
                 ,A.ID_STATUS
                 ,B.STATUS
@@ -54,7 +55,7 @@ class getHefesto {
                 INNER JOIN TBA_STATUS AS B ON A.ID_STATUS = B.ID
                 LEFT JOIN TBA_SUBSTATUS AS C ON C.ID = A.ID_SUBSTATUS
                 WHERE B.ID_PROJECT = 1
-                GROUP BY A.ID_STATUS, A.ENTRANCE, B.STATUS`,
+                GROUP BY A.ID_STATUS, A.ENTRANCE, B.STATUS, B.[ORDER]`,
                 inputs: [
                     { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.id_project }
                 ]
@@ -74,7 +75,7 @@ class getHefesto {
                 sql: `
                 SELECT * FROM TBF_CLIENTS WHERE ID_STATUS = @STATUS`,
                 inputs: [
-                    { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.status }
+                    { key: 'STATUS', type: dbMSSQL.Int, value: params.status }
                 ]
             });
 
@@ -85,6 +86,7 @@ class getHefesto {
             throw error;
         }
     }
+    
 }
 
 module.exports = new getHefesto();

@@ -1,84 +1,105 @@
 .information {
-    width: max-content;
-    height: max-content;
-    padding-top: 2px;
-    background: #660099;
-    background: linear-gradient(to top left, #0400d6 0%, #cfd0ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    cursor: pointer;
-  }
-  .information:hover{
-    transition: all 0.2s;
-    transform: scale(1.1);
-  }
-  .nova-massiva .tooltiptext {
-    visibility: hidden;
-    color: #222;
-    font-weight: 100;
-    white-space: nowrap;
-    margin-bottom: 58px;
-    font-size: 10px;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-  }
-  
-  .nova-massiva:hover .tooltiptext {
-    visibility: visible;
-  }
-  .button_plus {
-    margin-left: 3px;
-    border-radius: 7px;
-    width: 40px;
-    height: 40px;
-    background: #50c248;
-    cursor: pointer;
-    border: 0;
-    box-shadow: 1px 1px 5px -2px rgb(55, 184, 0.75);
+  width: max-content;
+  height: max-content;
+  padding-top: 2px;
+  background: #660099;
+  background: linear-gradient(to top left, #0400d6 0%, #cfd0ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.information:hover {
+  transition: all 0.2s;
+  transform: scale(1.1);
+}
+
+.nova-massiva .tooltiptext {
+  visibility: hidden;
+  color: #222;
+  font-weight: 100;
+  white-space: nowrap;
+  margin-bottom: 58px;
+  font-size: 10px;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.nova-massiva:hover .tooltiptext {
+  visibility: visible;
+}
+
+.button_plus {
+  margin-left: 3px;
+  border-radius: 7px;
+  width: 40px;
+  height: 40px;
+  background: #50c248;
+  cursor: pointer;
+  border: 0;
+  box-shadow: 1px 1px 5px -2px rgb(55, 184, 0.75);
   -webkit-box-shadow: 1px 1px 5px -2px rgb(55, 184, 0.75);
   -moz-box-shadow: 1px 1px 5px -2px rgb(55, 184, 0.75);
 
-    /* Mittig */
-  }
-  .button_plus i, .plus-step{
-    color: #ffffff;
-    font-size: 25px;  
-    -webkit-text-stroke: 1px;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-    display: flex;
-    /* Mittig */
-  }
+  /* Mittig */
+}
+
+.button_plus i,
+.plus-step {
+  color: #ffffff;
+  font-size: 25px;
+  -webkit-text-stroke: 1px;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  display: flex;
+  /* Mittig */
+}
 
 
-  .button_plus:hover {
-    background: #50c248;
-    transition: 0.2s;
-    box-shadow: rgb(55, 184, 0.24) 0px 1px 4px 1px;
-  }
+.button_plus:hover {
+  background: #50c248;
+  transition: 0.2s;
+  box-shadow: rgb(55, 184, 0.24) 0px 1px 4px 1px;
+}
 
-  .edit-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 120px;
-    font-weight: 500;
-    background-color: #3a5eff;
-    color: white
+.edit-card,
+.edit-stock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 120px;
+  font-weight: 500;
+  color: white
+}
+
+.edit-card {
+  background-color: #3a5eff;
 }
 
 .edit-card:hover {
-    color: #ffffff;
-    background-color: #3a5eff;
-    -webkit-box-shadow: 1px 2px 23px 0px #3a5eff;
-    -moz-box-shadow: 1px 2px 23px 0px #3a5eff;
-    box-shadow: 1px 2px 23px 0px #3a5eff;
+  color: #ffffff;
+  background-color: #3a5eff;
+  -webkit-box-shadow: 1px 2px 23px 0px #3a5eff;
+  -moz-box-shadow: 1px 2px 23px 0px #3a5eff;
+  box-shadow: 1px 2px 23px 0px #3a5eff;
+}
+
+.edit-stock {
+  background-color: #42b883;
+}
+
+.edit-stock:hover {
+  color: #ffffff;
+  background-color: #42b883;
+  -webkit-box-shadow: 1px 2px 23px 0px #42b883;
+  -moz-box-shadow: 1px 2px 23px 0px #42b883;
+  box-shadow: 1px 2px 23px 0px #42b883;
 }
 
 
@@ -133,15 +154,17 @@
   font-weight: bolder;
   color: rgb(77, 77, 77)
 }
-.deleteDate{
+
+.deleteDate {
   background-color: #EC507D;
   color: white
 }
-.deleteDate:hover{
+
+.deleteDate:hover {
   background-color: #e82f63;
-  -webkit-box-shadow: 1px 2px 23px -3px rgba(232,47,99,1);
--moz-box-shadow: 1px 2px 23px -3px rgba(232,47,99,1);
-box-shadow: 1px 2px 23px -3px rgba(232,47,99,1);
+  -webkit-box-shadow: 1px 2px 23px -3px rgba(232, 47, 99, 1);
+  -moz-box-shadow: 1px 2px 23px -3px rgba(232, 47, 99, 1);
+  box-shadow: 1px 2px 23px -3px rgba(232, 47, 99, 1);
 }
 
 .sendProducts {
@@ -195,6 +218,7 @@ box-shadow: 1px 2px 23px -3px rgba(232,47,99,1);
   font-weight: bolder;
   color: rgb(77, 77, 77)
 }
+
 .workflow {
   color: rgb(56, 56, 56);
   font-weight: bolder;
@@ -207,11 +231,13 @@ box-shadow: 1px 2px 23px -3px rgba(232,47,99,1);
   font-size: 15px;
   transition: all .5s ease;
 }
+
 .workflow:hover {
   background-color: hsl(261deg 80% 48%);
   color: hsl(0, 0%, 100%);
   box-shadow: rgb(93 24 220) 0px 3px 15px 0px;
 }
+
 .workflow:active {
   background-color: hsl(261deg 80% 48%);
   color: hsl(0, 0%, 100%);

@@ -3,12 +3,6 @@
 .notSticked .color-nav{
 	z-index: 99;
 }
-.logout:hover{
-    background-color: rgb(255, 220, 220)!important;
-    border-radius: 5px;
-    cursor:pointer;
-    margin: 0;
-}
 .fixed{
     display:block;
     position:absolute;
@@ -58,9 +52,6 @@
     
 }
 
-.size{
-    width: 250px;
-}
 .teste-flex{
 	position: relative;
 	display: flex;
@@ -74,37 +65,40 @@
 	border-radius: .25rem;
 	flex-wrap: nowrap; /* Key Line */
 }
-.card-size{
-    width: 250px;
-}
-
 ///////SIDEBAR
 .sidebarHover, .sidebarHover span{
+	font-family: "Montserrat", sans-serif;
+	font-optical-sizing: auto;
+	font-size: 0.8rem;
+    font-weight: 500;
+	line-height: 100%;
+	align-items: center;
+	justify-content: center;
+	vertical-align: middle;
 
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: bolder;
-    color: #303030;
-	
-}
-.sidebarHover span{
-	
-}
-.list-group-item{
+    color: white;
 	
 }
 .side-nav-container {
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
 	z-index: 10;
 	background-color: var(--light);
-	width: 220px;
-	height: 1500px;
+	max-width: 200px;
+	overflow: hidden;
 	position: fixed;
 	color: var(--dark);
+	transition: max-width 0.6s ease-in-out;
 
-	transition: 0.1s;
 }
-
+.dropdown-toggle:after{
+	display: none!important;
+}
 .side-nav-container-NX {
-	width: 50px;
+	z-index: 10;
+	max-width: 85px;
+	overflow: hidden;
+	transition: max-width 0.6s ease-in-out;
 }
 
 .nav-upper,
@@ -118,9 +112,8 @@
 
 .nav-heading {
 	
-	background-color: white;
-	grid-template-columns: 2fr 1fr;
-	grid-template-rows: 1fr;
+	
+	background: rgb(72,69,159);
 	height: 80px;
 	margin-top: -15px;
 	margin-bottom: -10px;
@@ -139,7 +132,8 @@
 
 
 .nav-menu {
-	background-color: white;
+	
+	background: rgb(72,69,159);
 	grid-template-rows: repeat(7, 1fr);
 	margin-top: 10px;
 }
@@ -167,37 +161,23 @@
 
 
 .text-margin {
-	margin-left: 15px;
-	color: gray;
+	display: flex;
+	justify-content: start;
+	margin-left: 0px;
+	color: white;
 }
 
 .text-decoration {
 	text-decoration: none;
 	color: white;
 }
-
-
 .icons-color {
-	color: #660099;
-	background: #990000;
-	background: linear-gradient(to top left, #222038 0%, #0004ff 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	color: white;
 	cursor: pointer;
 }
 .list-group-item:hover .icons-color {
-	color: #000000;
-	background: #990000;
-	background: linear-gradient(to top left, #3a5eff 0%, #001aff 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
 	cursor: pointer;
 }
-.nav-menu .list-group-item:hover  {
-	transition: all 0.5s;
-	background-color: #c7c7c7!important;
-}
-
 .subText {
 	white-space: nowrap!important;
 
@@ -210,9 +190,8 @@
 	margin-left: 40px;
 }
 .img-nav{
-	height: 80px;
+	height: 60px;
 	padding-left: 40px;
-	padding-top: 12px;
 }
 
 #checkbox-menu {
@@ -225,19 +204,18 @@
 	position: relative;
 	display: block;
 	height: 22px;
-	width: 35px;
+	width: 200px;
 	top: 35px;
-	margin-left: 30px;
 }
 
 .nav-heading label span {
 	position: absolute;
+	margin-left: 10px;
 	display: block;
-	height: 5px;
 	width: 100%;
 	border-radius: 30px;
-	background: rgb(65, 65, 65);
-	transition: 0.25s ease-in-out;
+	background: rgb(255, 255, 255);
+	transition: all 0.3s ease-in-out 0.2s;
 }
 
 .nav-heading label span:nth-child(1) {
@@ -267,7 +245,7 @@
 }
 #checkbox-menu+label span{
 	width: 30px!important;
-	height: 3.5px;
+	height: 2px;
 }
 .width-side {
 	width: 140px;
@@ -281,7 +259,6 @@
 	left: 0;
 	z-index: 10;
 	display: none;
-	min-width: 200px;
 	padding: 0;
 	margin: 0;
 	list-style: none;
@@ -290,12 +267,13 @@
 
 .list-group-item {
 	cursor: pointer;
-	border: none!important;
+	background: rgb(72,69,159);
 }
 
 
 .list-group-item:hover {
-	background-color: rgba(134, 8, 156, 0.2);
+	background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 20px;
 
 	transition: 0.5s;
 

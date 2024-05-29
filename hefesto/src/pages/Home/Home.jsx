@@ -5,12 +5,12 @@ import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import APIGET from '../../services/workflow/Consultar';
 import APIEDIT from '../../services/workflow/Editar';
+import Preloader from "../../layout/preLoader/Preloader.jsx";
 
 
 
 
 const Home = () => {
-
     const [expand, setExpand] = useState(0);
     const [comboProject, setComboProject] = useState([]);
     const [project, setProject] = useState('');
@@ -20,13 +20,20 @@ const Home = () => {
     const [cards, setCards] = useState([]);
     const [cardDesc, setCardDesc] = useState([]);
     const [active, setActive] = useState([]);
+    const [preloading, setPreloading] = useState(true);
     useEffect(() => {
+        //pre-loader
+        setTimeout(() => {
+            setPreloading(false);
+        }, 1500);
+
+
+
         setLoading(true)
         const projects = APIGET.getProjects().then(e => {
             setComboProject(e)
             setLoading(false)
         }).catch(console.error)
-
     }, []);
     const createClient = async () => {
         setLoading(true)
@@ -130,7 +137,7 @@ const Home = () => {
     return (
 
         <>
-
+            {preloading ? <Preloader /> : <></>}
             {loading == true ? <div class=" bg-loader">
                 <div class="loader"></div>
             </div> : <></>}

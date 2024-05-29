@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import vivo from './logo_nav.png';
+import vivo from './logo_nav_white.png';
 
 
 function useOutsideAlerter(ref, isExpanded) {
@@ -84,43 +84,44 @@ const SideNavBar = (ref) => {
 			<div className="nav-upper" onMouseLeave={() => ExpansionReduceDetails()} onMouseOver={() => ExpansionPanelDetails()}>
 				<div className="nav-heading"
 				>
-					{isExpanded && (
-						<div >
-							<span><img src={vivo} className="img-nav"/></span>
-						</div>
-					)}
 					<input type="checkbox" id="checkbox-menu" />
 					<label for="checkbox-menu">
 						<span></span>
 						<span></span>
 						<span></span>
 					</label>
+					{isExpanded && (
+						<div >
+							<span><img src={vivo} data-aos="zoom-in" data-aos-duration="800" className="img-nav"/></span>
+						</div>
+					)}
+					
 				</div>
 				<div className="nav-menu">
 					<div class="list-group">
 						<Link to="/" className="decoration" onClick={e => removeChecked()} >
-							<span class="list-group-item list-group-item-action " ><span class="text-margin sidebarHover"><i class="bi bi-pie-chart-fill fs-4 icons-color "></i>{isExpanded && (
-								<span class='sidebarHover' style={{ marginLeft: "10px" }}> Dashboard</span>
+							<span class="list-group-item list-group-item-action " ><span class="text-margin sidebarHover"><i class="bi bi-pie-chart fs-4 icons-color "></i>{isExpanded && (
+								<span data-aos="zoom-in" data-aos-duration="800" class='sidebarHover'  style={{ marginLeft: "10px" }}> Dashboard</span>
 							)} </span></span>
 						</Link>
 						<div>
-							<span class="list-group-item list-group-item-action dropdown-toggle" onClick={e => subMenu(1)}><span class="text-margin sidebarHover"><i class="bi bi-database-fill-up fs-4 icons-color"></i>{isExpanded && (
-								<span style={{ marginLeft: "10px" }}>Workflow</span>
+							<span class="list-group-item list-group-item-action dropdown-toggle" onClick={e => subMenu(1)}><span class="text-margin sidebarHover"><i class="bi bi-database-up fs-4 icons-color"></i>{isExpanded && (
+								<span data-aos="zoom-in" data-aos-duration="800" style={{ marginLeft: "10px" }}>Workflow</span>
 							)} </span></span>
 						</div>
 						{showSubCreation && (
 							<div class='transitionDown'>
 								<div class="list-group">
 									<Link to="/CreateProduct" className="decoration" onClick={e => removeChecked()}>
-										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-plus-square-fill fs-6 icons-color sub-menu"></i>{isExpanded && (
-											<span style={{ marginLeft: "20px" }}>Criar produto</span>
+										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-plus-square fs-6 icons-color sub-menu"></i>{isExpanded && (
+											<span data-aos="zoom-in" data-aos-duration="800" style={{ marginLeft: "20px" }}>Criar produto</span>
 										)} </span></span>
 									</Link>
 								</div>	
 								<div class="list-group">
 									<Link to="/CreateProcess" className="decoration" onClick={e => removeChecked()}>
 										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-github fs-6 icons-color sub-menu"></i>{isExpanded && (
-											<span style={{ marginLeft: "20px" }}>Adicionar esteira</span>
+											<span data-aos="zoom-in" data-aos-duration="800" style={{ marginLeft: "20px" }}>Adicionar esteira</span>
 										)} </span></span>
 									</Link>
 								</div>
@@ -129,22 +130,22 @@ const SideNavBar = (ref) => {
 							</div>
 						)}
 						<div>
-							<span class="list-group-item list-group-item-action dropdown-toggle" onClick={e => subMenu(2)}><span class="text-margin sidebarHover"><i class="bi bi-telephone-outbound-fill fs-5 icons-color"></i>{isExpanded && (
-								<span style={{ marginLeft: "10px" }}> Contato</span>
+							<span class="list-group-item list-group-item-action dropdown-toggle" onClick={e => subMenu(2)}><span class="text-margin sidebarHover"><i class="bi bi-telephone-outbound fs-5 icons-color"></i>{isExpanded && (
+								<span data-aos="zoom-in" data-aos-duration="800" style={{ marginLeft: "10px" }}> Contato</span>
 							)} </span></span>
 						</div>
 						{showSubFibra && (
-							<div class='transitionDown'>
+							<div class='transitionDown' >
 								<div class="list-group">
 									<Link to="https://www.linkedin.com/in/eliseu-caetano-da-silva-68a272186/" className="decoration" onClick={e => removeChecked()}>
-										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-linkedin fs-6 icons-color sub-menu"></i>{isExpanded && (
+										<span data-aos="zoom-in" data-aos-duration="800" class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-linkedin fs-6 icons-color sub-menu"></i>{isExpanded && (
 											<span style={{ marginLeft: "20px" }}>Linkedin</span>
 										)} </span></span>
 									</Link>
 								</div>	
 								<div class="list-group">
 									<Link to="https://github.com/eliseu441/" className="decoration" onClick={e => removeChecked()}>
-										<span class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-github fs-6 icons-color sub-menu"></i>{isExpanded && (
+										<span data-aos="zoom-in" data-aos-duration="800" class="list-group-item list-group-item-action"><span class="text-margin sidebarHover"><i class="bi bi-github fs-6 icons-color sub-menu"></i>{isExpanded && (
 											<span style={{ marginLeft: "20px" }}>Github</span>
 										)} </span></span>
 									</Link>

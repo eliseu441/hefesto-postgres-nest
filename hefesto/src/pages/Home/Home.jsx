@@ -23,6 +23,8 @@ const Home = () => {
     const [cardDesc, setCardDesc] = useState([]);
     const [active, setActive] = useState([]);
     const [preloading, setPreloading] = useState(true);
+    
+    
     useEffect(() => {
         //pre-loader
         setTimeout(() => {

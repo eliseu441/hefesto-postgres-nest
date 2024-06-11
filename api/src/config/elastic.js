@@ -12,7 +12,7 @@ var apm = require('elastic-apm-node').start({
 
     // Set the custom APM Server URL (default: http://localhost:8200)
     // serverUrl: 'https://7385334e00084d00a911ded2eeaa8745.apm.eastus2.azure.elastic-cloud.com:443',
-    serverUrl: 'http://10.129.145.199:8200',
+    serverUrl: '',
 
     // distributedTracingOrigins: ['http://localhost:3000'],
 

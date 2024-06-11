@@ -32,7 +32,6 @@ const io = require('socket.io')(server, { path: '' + '/socket.io' })
 app.set('io', io)
 
 const { socket } = app.config
-console.log('teste')
 io.on('connection', client => {
     socket.onConnect(client, io)
 });

@@ -45,7 +45,7 @@ const CreateProducts = () => {
     const showProducts = async () => {
         //   onClick={e=> deleteProduct(detailProdutcs.length)}
         let cardProducts = [...detailProdutcs,
-        <div class='col-sm mt-4 d-flex justify-content-center p-1' data-aos="fade-up">
+        <div class='col-sm-4 d-flex justify-content-center mt-4  p-0' data-aos="fade-up" >
             <div class="product ">
                 <div class="info__title col-12" style={{ fontWeight: 'bold', textTransform: 'uppercase' }}>{products}</div>
                 <div class="info__title col-12">Preço: R${price}</div>
@@ -193,25 +193,25 @@ const CreateProducts = () => {
                                     <button className="btn ms-3 deleteDate" onClick={e => handleDateChange(null)}> <i class="bi bi-trash-fill"></i> </button>
                                 </div>
                             </div>
-                            
+
 
                             <div class=' col-sm-4'>
-                            <div class='col-12 m-1 d-flex align-items-center'>
-                                
-                                <Switch
-                                    height={15}
-                                    handleDiameter={20}
-                                    width={35}
-                                    boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-                                    activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-                                    onChange={e=> setExistent(!existent)}
-                                    onColor="#86d3ff"
-                                    onHandleColor="#2693e6"
-                                    uncheckedIcon=""
-                                    checkedIcon=""
-                                    checked={existent} />
+                                <div class='col-12 m-1 d-flex align-items-center'>
+
+                                    <Switch
+                                        height={15}
+                                        handleDiameter={20}
+                                        width={35}
+                                        boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                                        activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                                        onChange={e => setExistent(!existent)}
+                                        onColor="#86d3ff"
+                                        onHandleColor="#2693e6"
+                                        uncheckedIcon=""
+                                        checkedIcon=""
+                                        checked={existent} />
                                     <span class='comboTitles'>Usar projeto existente</span>
-                            </div>
+                                </div>
                                 <DropdownList
                                     textField='PROJECT'
                                     data={comboProjects}
@@ -224,8 +224,12 @@ const CreateProducts = () => {
                                 />
 
                             </div>
-                            
 
+                            <div class=" sendProducts mt-4 me-2 ms-3" onClick={(e) => insertProject()}>
+                                <i class="bi bi-send-x-fill" >
+                                    <span class="tooltiptext">adicionar projeto</span>
+                                </i>
+                            </div>
                         </div>
 
                     </div>
@@ -258,11 +262,6 @@ const CreateProducts = () => {
                                     <span class="tooltiptext">adicionar produto</span>
                                 </i>
                             </div>
-                            <div class="sendProducts ms-2 mt-4 col-1 ms-3" onClick={e => sendProducts()}>
-                                <i class="bi bi-send-x-fill">
-                                    <span class="tooltiptext">cadastrar produtos</span>
-                                </i>
-                            </div>
                             <div class="cleanPed ms-1 mt-4 ms-3" onClick={e => deleteProduct()} >
                                 <i class="bi bi-trash-fill ">
                                     <span class="tooltiptext">Excluir produtos</span>
@@ -286,8 +285,21 @@ const CreateProducts = () => {
 
 
                             </div>
-                            <div class='row d-flex justify-content-center'  >
-                                {detailProdutcs.length > 0 ? <div data-aos="zoom-in">{detailProdutcs}</div> : <p class='col-12 d-flex justify-content-center' style={{color:'red', fontWeight:'bolder'}}>nenhum produto cadastrado</p>}
+                            <div class='row d-flex justify-content-center col-12'  >
+                                
+                                
+                                {detailProdutcs.length > 0 ? <div class='row ' data-aos="zoom-in">
+                                    <div class='mt-2 col-12 d-flex justify-content-center'>
+                                <button
+                                    class="btn edit-stock "
+                                    style={{ height: '30px' }}
+                                    onClick={e => sendProducts()}
+                                >
+                                    Eviar
+                                </button>
+                                </div>
+                                    {detailProdutcs}
+                                    </div> : <p class='col-12 d-flex justify-content-center' style={{ color: 'red', fontWeight: 'bolder' }}>nenhum produto cadastrado</p>}
 
                             </div>
 

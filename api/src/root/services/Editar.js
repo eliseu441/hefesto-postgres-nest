@@ -6,6 +6,7 @@ const excel = require('exceljs');
 const { networkInterfaces } = require('os');
 
 const ValidationError = require('../../errors/ValidationError');
+const { Console } = require('console');
 class editHefesto {
 
     constructor() {
@@ -106,46 +107,46 @@ class editHefesto {
                 inputs: [
                     { key: 'ID', type: dbMSSQL.Int, value: params.order_id !== 0 ? params.order_id : 0 }
                 ]
-            }); 
-            let order = getOrder.length !==0 ? getOrder[0].ORDER : 50 
-            if( getOrder.length !==0){
-                        const add = await dbMSSQL.update({
-                            sql: `
+            });
+            let order = getOrder.length !== 0 ? getOrder[0].ORDER : 50
+            if (getOrder.length !== 0) {
+                const add = await dbMSSQL.update({
+                    sql: `
                             UPDATE TBA_STATUS
                             SET [ORDER] = [ORDER] + 1 WHERE [ORDER] > @ORDER`,
-                            inputs: [
-                                { key: 'ORDER', type: dbMSSQL.Decimal, value: order }
-                            ]
-                        });
-                        const subtract = await dbMSSQL.update({
-                            sql: `
+                    inputs: [
+                        { key: 'ORDER', type: dbMSSQL.Decimal, value: order }
+                    ]
+                });
+                const subtract = await dbMSSQL.update({
+                    sql: `
                             UPDATE TBA_STATUS
                             SET [ORDER] = [ORDER] - 1 WHERE [ORDER] < @ORDER`,
-                            inputs: [
-                                { key: 'ORDER', type: dbMSSQL.Decimal, value: order + 1 }
-                            ]
-                        });
+                    inputs: [
+                        { key: 'ORDER', type: dbMSSQL.Decimal, value: order + 1 }
+                    ]
+                });
             }
-            if(params.order_id == '0'){
+            if (params.order_id == '0') {
                 const getData = await dbMSSQL.query({
                     sql: `SELECT * FROM TBA_STATUS WHERE ID_PROJECT = @ID_PROJECT `,
                     inputs: [
                         { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.id_project }
                     ]
-                }); 
-                if( getData.length !==0){
+                });
+                if (getData.length !== 0) {
                     const newOrder = await dbMSSQL.query({
                         sql: `SELECT TOP (1) [ORDER] - 1 AS [ORDER]
                         FROM [HEFESTO].[dbo].[TBA_STATUS] ORDER BY [ORDER] ASC`
-                    }); 
+                    });
                     order = newOrder[0].ORDER
                 }
             }
 
 
 
-                const sql = await dbMSSQL.update({
-                    sql: `
+            const sql = await dbMSSQL.update({
+                sql: `
                 INSERT INTO TBA_STATUS
                 (   
                     [STATUS]
@@ -160,20 +161,98 @@ class editHefesto {
                     ,@ORDER
                     ,@ID_PROJECT
                 )`,
-                    inputs: [
-                        { key: 'STATUS', type: dbMSSQL.Varchar, value: params.status },
-                        { key: 'SLA', type: dbMSSQL.Int, value: params.sla },
-                        { key: 'ORDER', type: dbMSSQL.Decimal, value: order },
-                        { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.id_project },
-                    ]
-                });
+                inputs: [
+                    { key: 'STATUS', type: dbMSSQL.Varchar, value: params.status },
+                    { key: 'SLA', type: dbMSSQL.Int, value: params.sla },
+                    { key: 'ORDER', type: dbMSSQL.Decimal, value: order },
+                    { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.id_project },
+                ]
+            });
 
-                if(sql == 1){
-                    return { insert: true }
-                }else{
-                    return { insert: false }
-                }
+            if (sql == 1) {
+                return { insert: true }
+            } else {
+                return { insert: false }
+            }
+
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+    async readFile(lines, params) {
+        try {
+            /*
+            QUERY para sql injection, porém lenta para desenvolvimento
+        const pool = await dbMSSQL.getPool()
+            for (let p of lines) {
+                const sql = await dbMSSQL.update({
+                    sql: `
+                    INSERT INTO TBF_GENERAL_STOCK
+                    (   
+                        [ITEM]
+                        ,[QUANTITY]
+                        ,[PRICE]
+                        ,[ENTRANCE]
+                        ,[ID_PROJECT]
+                    )
+                    VALUES
+                    (   
+                        @ITEM
+                        ,@QUANTITY
+                        ,@PRICE
+                        ,CURRENT_TIMESTAMP
+                        ,@ID_PROJECT
+    
+                    )`,
+                    inputs: [
+                        { key: 'ITEM', type: dbMSSQL.Varchar, value: p.name },
+                        { key: 'QUANTITY', type: dbMSSQL.Int, value: p.quantity },
+                        { key: 'PRICE', type: dbMSSQL.Int, value: p.price },
+                        { key: 'ID_PROJECT', type: dbMSSQL.Int, value: p.project },
+                    ],
+                    pool
+                });
+            }
+            await dbMSSQL.closePool(pool)
+            */
+            let concat = []
+            for (let p of lines) {
+                concat = [...concat, `(
+                    '${p.name}' ,
+                    '${p.quantity}' ,
+                    '${p.price}' , 
+                    CURRENT_TIMESTAMP ,
+                    '${p.project}')`]
+
+            }
+            let queryInputs = concat.join()
+            console.log(queryInputs)
+            const sql = await dbMSSQL.update({
+                sql: `
+                INSERT INTO TBF_GENERAL_STOCK
+                (   
+                    [ITEM]
+                    ,[QUANTITY]
+                    ,[PRICE]
+                    ,[ENTRANCE]
+                    ,[ID_PROJECT]
+                )
+                VALUES
+                ${queryInputs}
+                `
+            });
+
             
+            return 1
+
+
+            if (sql == 1) {
+                return { insert: true }
+            } else {
+                return { insert: false }
+            }
+
         } catch (error) {
             console.error(error);
             throw error;
@@ -183,8 +262,8 @@ class editHefesto {
     async insertSubstatus(params) {
         try {
 
-                const sql = await dbMSSQL.update({
-                    sql: `
+            const sql = await dbMSSQL.update({
+                sql: `
                 INSERT INTO TBA_SUBSTATUS
                 (   
                     [SUBSTATUS]
@@ -196,18 +275,18 @@ class editHefesto {
                     ,@ID_STATUS
 
                 )`,
-                    inputs: [
-                        { key: 'SUBSTATUS', type: dbMSSQL.Varchar, value: params.substatus },
-                        { key: 'ID_STATUS', type: dbMSSQL.Int, value: params.id_status },
-                    ]
-                });
+                inputs: [
+                    { key: 'SUBSTATUS', type: dbMSSQL.Varchar, value: params.substatus },
+                    { key: 'ID_STATUS', type: dbMSSQL.Int, value: params.id_status },
+                ]
+            });
 
-                if(sql == 1){
-                    return { insert: true }
-                }else{
-                    return { insert: false }
-                }
-            
+            if (sql == 1) {
+                return { insert: true }
+            } else {
+                return { insert: false }
+            }
+
         } catch (error) {
             console.error(error);
             throw error;
@@ -216,8 +295,8 @@ class editHefesto {
     async insertClient(params) {
         try {
 
-                const sql = await dbMSSQL.update({
-                    sql: `
+            const sql = await dbMSSQL.update({
+                sql: `
                     INSERT INTO TBF_CLIENTS
                     (   
                         [CLIENT]
@@ -233,18 +312,18 @@ class editHefesto {
                         ,CONVERT(date, CURRENT_TIMESTAMP)
     
                     )`,
-                    inputs: [
-                        { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.id_project },
-                        { key: 'CLIENT', type: dbMSSQL.Varchar, value: params.client }
-                    ]
-                });
+                inputs: [
+                    { key: 'ID_PROJECT', type: dbMSSQL.Int, value: params.id_project },
+                    { key: 'CLIENT', type: dbMSSQL.Varchar, value: params.client }
+                ]
+            });
 
-                if(sql == 1){
-                    return { insert: true }
-                }else{
-                    return { insert: false }
-                }
-            
+            if (sql == 1) {
+                return { insert: true }
+            } else {
+                return { insert: false }
+            }
+
         } catch (error) {
             console.error(error);
             throw error;

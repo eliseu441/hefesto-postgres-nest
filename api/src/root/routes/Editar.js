@@ -35,5 +35,24 @@ module.exports = (app) => {
         .then(result => res.status(result.status ? result.status : 200).json(result))
         .catch(err => next(err))
     });
+    router.post('/readFile', async (req,res,next) =>{
+ 
+        try {
+            if (!req.body.json) {
+                let erro = new Error('JSON');
+                erro.status = 500
+                throw erro
+            }
+            const params = JSON.parse(req.body.json)
+            console.log(req)
+            const result = await app.root.models.Editar.readFile(params, req.files)
+            res.status(200).json(result)
+
+        } catch (err) {
+            next(err);
+        }
+
+    })
+
     return router;
 };

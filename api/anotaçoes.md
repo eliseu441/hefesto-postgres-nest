@@ -1,0 +1,1 @@
+melhorar readFile usando inputs for(x of linhas){... inputs.push(input${contador})} 

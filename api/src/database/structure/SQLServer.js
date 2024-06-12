@@ -84,7 +84,6 @@ module.exports = class SQLServerMapper extends BancoMetodos
             if (param.inputs) {
                 param.inputs.forEach(input => request.input(input.key, input.type, input.value));
             }
-            console.log(param)
             rs = await request.query(param.sql, param.inputs);
             
 

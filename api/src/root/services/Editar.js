@@ -13,6 +13,86 @@ class editHefesto {
 
     }
 
+    async readFile(lines, params) {
+        try {
+
+            let where = { conditions: [], inputs: [] };
+            let contador = 0    
+            for (let p of lines) {
+                console.log(params.statusMacro)
+                where.conditions.push(`( @ITEM${contador}, @QUANTITY${contador}, @PRICE${contador}, CURRENT_TIMESTAMP, @ID_PROJECT${contador} )`)
+                where.inputs.push(
+                    { key: `ITEM${contador}`, type: dbMSSQL.Varchar, value: p.name },
+                    { key: `QUANTITY${contador}`, type: dbMSSQL.Int, value: p.quantity },
+                    { key: `PRICE${contador}`, type: dbMSSQL.Int, value: p.price },
+                    { key: `ID_PROJECT${contador}`, type: dbMSSQL.Int, value: p.project })
+                contador++
+
+
+            }
+            console.log(where)
+            const sql = await dbMSSQL.update({
+                sql: `
+                INSERT INTO TBF_GENERAL_STOCK
+                (   
+                    [ITEM]
+                    ,[QUANTITY]
+                    ,[PRICE]
+                    ,[ENTRANCE]
+                    ,[ID_PROJECT]
+                )
+                VALUES
+                ${where.conditions.join(' , ')}`,
+                inputs: where.inputs,
+                verbose:true
+
+            });
+            return sql
+            /*
+            
+            let concat = []
+            for (let p of lines) {
+                concat = [...concat, `(
+                    '${p.name}' ,
+                    '${p.quantity}' ,
+                    '${p.price}' , 
+                    CURRENT_TIMESTAMP ,
+                    '${p.project}')`]
+
+            }
+            let queryInputs = concat.join()
+            console.log(queryInputs)
+            const sql = await dbMSSQL.update({
+                sql: `
+                INSERT INTO TBF_GENERAL_STOCK
+                (   
+                    [ITEM]
+                    ,[QUANTITY]
+                    ,[PRICE]
+                    ,[ENTRANCE]
+                    ,[ID_PROJECT]
+                )
+                VALUES
+                ${queryInputs}
+                `
+            });
+
+
+            return 1
+*/
+
+            if (sql == 1) {
+                return { insert: true }
+            } else {
+                return { insert: false }
+            }
+
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     async insertProject(params) {
         try {
 
@@ -180,85 +260,6 @@ class editHefesto {
             throw error;
         }
     }
-    async readFile(lines, params) {
-        try {
-            /*
-            QUERY para sql injection, porém lenta para desenvolvimento
-        const pool = await dbMSSQL.getPool()
-            for (let p of lines) {
-                const sql = await dbMSSQL.update({
-                    sql: `
-                    INSERT INTO TBF_GENERAL_STOCK
-                    (   
-                        [ITEM]
-                        ,[QUANTITY]
-                        ,[PRICE]
-                        ,[ENTRANCE]
-                        ,[ID_PROJECT]
-                    )
-                    VALUES
-                    (   
-                        @ITEM
-                        ,@QUANTITY
-                        ,@PRICE
-                        ,CURRENT_TIMESTAMP
-                        ,@ID_PROJECT
-    
-                    )`,
-                    inputs: [
-                        { key: 'ITEM', type: dbMSSQL.Varchar, value: p.name },
-                        { key: 'QUANTITY', type: dbMSSQL.Int, value: p.quantity },
-                        { key: 'PRICE', type: dbMSSQL.Int, value: p.price },
-                        { key: 'ID_PROJECT', type: dbMSSQL.Int, value: p.project },
-                    ],
-                    pool
-                });
-            }
-            await dbMSSQL.closePool(pool)
-            */
-            let concat = []
-            for (let p of lines) {
-                concat = [...concat, `(
-                    '${p.name}' ,
-                    '${p.quantity}' ,
-                    '${p.price}' , 
-                    CURRENT_TIMESTAMP ,
-                    '${p.project}')`]
-
-            }
-            let queryInputs = concat.join()
-            console.log(queryInputs)
-            const sql = await dbMSSQL.update({
-                sql: `
-                INSERT INTO TBF_GENERAL_STOCK
-                (   
-                    [ITEM]
-                    ,[QUANTITY]
-                    ,[PRICE]
-                    ,[ENTRANCE]
-                    ,[ID_PROJECT]
-                )
-                VALUES
-                ${queryInputs}
-                `
-            });
-
-            
-            return 1
-
-
-            if (sql == 1) {
-                return { insert: true }
-            } else {
-                return { insert: false }
-            }
-
-        } catch (error) {
-            console.error(error);
-            throw error;
-        }
-    }
-
     async insertSubstatus(params) {
         try {
 

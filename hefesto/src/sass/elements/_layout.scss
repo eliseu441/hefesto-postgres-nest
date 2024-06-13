@@ -362,6 +362,7 @@
 	z-index: 99999;
   }
   .cadastro-project{
+	height: fit-content;
 	position: relative;
 	z-index: 2;
   }
@@ -504,4 +505,16 @@
 	width: 1px;
 	height: 100%;
   }
-  
+  .products-card{
+	height: max-content;
+	
+  }
+  .card-title{
+	font-family: "Montserrat", sans-serif;
+	font-optical-sizing: auto;
+	font-size: 1rem;
+    font-weight: bolder;
+  }
+  .modal-massiva .modal-body{
+	overflow-x: hidden;
+  }

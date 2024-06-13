@@ -1,0 +1,33 @@
+.info-dropzoneFiles {
+  position: absolute;
+  top: 0;
+  left: 70px;
+  padding: 0px;
+  max-width: 100%;
+  width: 65%;
+}
+
+.text-size {
+  max-width: 300px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+@media (max-width: 767.98px) {
+  .info-dropzoneFiles {
+    width: 75%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .info-dropzoneFiles {
+    position: relative;
+    left: 0;
+    width: 100%;
+  }
+}

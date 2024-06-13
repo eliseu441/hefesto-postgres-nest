@@ -42,6 +42,10 @@
     box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 3px 2px, rgba(60, 64, 67, 0.15) 2px 3px 6px 2px;
     outline: none;
   }
+  .default-input:disabled{
+    background-color: rgb(218, 218, 218);
+    box-shadow: none;
+  }
 
   /////////// HOME
   

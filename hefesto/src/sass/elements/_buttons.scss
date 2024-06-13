@@ -104,6 +104,14 @@
 
 
 
+.deleteDate {
+  background-color: #EC507D;
+  color: white
+}
+
+.deleteDate:hover {
+}
+
 .cleanPed {
   border-radius: 7px;
   width: 40px;
@@ -131,7 +139,10 @@
 
 
 .cleanPed:hover {
-  background: #e82f63;
+  background-color: #e82f63;
+  -webkit-box-shadow: 1px 2px 23px -3px rgba(232, 47, 99, 1);
+  -moz-box-shadow: 1px 2px 23px -3px rgba(232, 47, 99, 1);
+  box-shadow: 1px 2px 23px -3px rgba(232, 47, 99, 1);
   transition: 0.2s;
 }
 
@@ -171,7 +182,7 @@
   border-radius: 7px;
   width: 40px;
   height: 40px;
-  background: #2f32f5;
+  background: rgb(86, 83, 170);
   cursor: pointer;
   border: 0;
   box-shadow: 1px 1px 5px -2px rgb(0, 0, 0);
@@ -195,7 +206,10 @@
 
 
 .sendProducts:hover {
-  background: #2e2e2e;
+  background-color: rgb(86, 83, 170);
+  -webkit-box-shadow: 1px 2px 23px -3px rgb(86, 83, 170);
+  -moz-box-shadow: 1px 2px 23px -3px rgb(86, 83, 170);
+  box-shadow: 1px 2px 23px -3px rgb(86, 83, 170);
   transition: 0.2s;
 }
 
@@ -245,3 +259,93 @@
   transform: translateY(10px);
   transition: 100ms;
 }
+.massiva{
+  height: 40px;
+  letter-spacing: 1.3px;
+  background-color: #006A4E;
+  color: white
+}
+.massiva:hover{
+  color: #ffffff;
+  background-color: #006A4E;
+  -webkit-box-shadow: 1px 2px 23px 0px #006A4E;
+-moz-box-shadow: 1px 2px 23px 0px #006A4E;
+box-shadow: 1px 2px 23px 0px #006A4E;
+}
+.templateMassiva {
+  margin-top: 20px;
+  transform: translate(-50%, -50%)
+}
+
+.templateMassiva a {
+  display: block;
+  height: 35px;
+  width: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  background: #0471f1;
+  color: white;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  -moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+.templateMassiva a:hover{
+  background: #0471f1;
+}
+
+b {
+  background: #222;
+  display: block;
+  height: 30px;
+  width: 110px;
+  margin: -33px 0 0 10px;
+  text-align: center;
+  font: 10px/40px Helvetica, Verdana, sans-serif;
+  color: #fff;
+  position: absolute;
+  z-index: -1;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  -moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.templateMassiva a, b {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  -moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+
+
+.templateMassiva:hover .bottom {
+  margin: -10px 0 0 10px;
+}
+
+.templateMassiva a:active {
+  background: #00b7ea;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b7ea', endColorstr='#009ec3',GradientType=0 );
+}
+
+.templateMassiva:active .bottom {
+  margin: -20px 0 0 10px;
+}
+

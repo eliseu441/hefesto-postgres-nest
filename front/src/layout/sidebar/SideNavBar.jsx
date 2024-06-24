@@ -58,14 +58,6 @@ const SideNavBar = (ref) => {
 			  break;	
 		  }
 	}
-	const subMenuEQP = () => {
-		setShowSubEQP(!showSubEQP);
-
-	}
-	const subMenuLegado = () => {
-		setShowSubLegado(!showSubLegado);
-
-	}
 	const removeChecked = () => {
 		setShowSubContact(false);
 		setShowSubEQP(false);

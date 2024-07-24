@@ -4,6 +4,7 @@
 /build
 .env
 /.env
+/api/.env
 # Logs
 logs
 *.log

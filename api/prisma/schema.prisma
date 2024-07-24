@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model tbl_projeto {
+  id           Int             @id @default(autoincrement())
+  nome         String
+  estoques     tbl_estoque[]
+  substatuses  tbl_status[]
+}
+
+model tbl_status {
+  id           Int             @id @default(autoincrement())
+  nome         String
+  id_projeto   Int
+  ordem        Float           @default(0.00)
+  substatuses  tbl_substatus[] 
+  projeto    tbl_projeto @relation(fields: [id_projeto], references: [id]) 
+}
+
+model tbl_substatus {
+  id        Int        @id @default(autoincrement())
+  nome      String
+  id_status Int
+  ordem     Float      @default(0.00)
+  status    tbl_status @relation(fields: [id_status], references: [id])
+  substatus  tbl_clientes[] 
+}
+
+model tbl_estoque {
+  id          Int     @id @default(autoincrement())
+  nome        String
+  id_projeto  Int
+  quantidade  Int
+  preco       Float
+  projeto     tbl_projeto @relation(fields: [id_projeto], references: [id])
+}
+model tbl_clientes {
+  id           Int          @id @default(autoincrement())
+  nome         String
+  id_status    Int
+  id_substatus Int
+  entrada      DateTime     @default(now())
+  substatus    tbl_substatus @relation(fields: [id_substatus], references: [id])
+}

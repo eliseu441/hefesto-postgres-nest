@@ -16,6 +16,7 @@ datasource db {
 model tbl_projeto {
   id           Int             @id @default(autoincrement())
   nome         String
+  sla         Int?
   estoques     tbl_estoque[]
   substatuses  tbl_status[]
 }
@@ -25,6 +26,7 @@ model tbl_status {
   nome         String
   id_projeto   Int
   ordem        Float           @default(0.00)
+  sla         Int?
   substatuses  tbl_substatus[] 
   projeto    tbl_projeto @relation(fields: [id_projeto], references: [id]) 
 }
